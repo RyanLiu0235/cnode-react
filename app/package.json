@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --watch",
+    "build": "webpack -p",
     "start": "webpack-dev-server --inline --host 0.0.0.0 --port 5000"
   },
   "author": "liucheng",
