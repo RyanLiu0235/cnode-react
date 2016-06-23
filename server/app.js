@@ -85,9 +85,9 @@ app.get('/getTopic', function(req, res) {
         });
 })
 
-app.listen(3000, function() {
-    console.log('server is running at http://' + getIpAddress() + ':' + 3000);
-    console.log('app is running at http://' + getIpAddress() + ':' + 8080);
+app.listen(5001, function() {
+    console.log('server is running at http://' + getIpAddress() + ':' + 5001);
+    console.log('app is running at http://' + getIpAddress() + ':' + 5000);
 });
 
 // 获取本机IP地址
