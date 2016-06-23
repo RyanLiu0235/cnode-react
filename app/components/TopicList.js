@@ -21,11 +21,14 @@ var TopicList = React.createClass({
                 page: this.state.nextPage
             },
             success: function(topicList) {
-                this.setState({
-                    topicList: topicList,
-                    checkMore: true,
-                    nextPage: 2
-                });
+                if (this.isMounted()) {
+                    this.setState({
+                        topicList: topicList,
+                        checkMore: true,
+                        nextPage: 2
+                    });
+                }
+                    
             }.bind(this)
         });
     },

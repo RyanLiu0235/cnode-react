@@ -28,3 +28,18 @@ $ node app.js
 ### 遗留问题
 
 * 需手动设置IP
+
+
+### 网页截图
+
+首页：
+![首页](./indexPage.jpg)
+
+帖子详情页1：
+![帖子详情页1](./topicDetail00.jpg)
+
+帖子详情页2：
+![帖子详情页2](./topicDetail01.jpg)
+
+评论列表：
+![评论列表](./commentList.jpg)

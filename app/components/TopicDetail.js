@@ -38,9 +38,11 @@ var TopicDetail = React.createClass({
                 id: this.props.params.id
             },
             success: function(topicDetail) {
-                this.setState({
-                    topicDetail: topicDetail
-                });
+                if (this.isMounted()) {
+                    this.setState({
+                        topicDetail: topicDetail
+                    });
+                }
             }.bind(this)
         })
     },
