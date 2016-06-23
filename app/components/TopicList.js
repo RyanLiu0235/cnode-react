@@ -6,7 +6,7 @@ var React = require('react'),
 var TopicList = React.createClass({
     getInitialState: function() {
         return {
-        	hostname: '10.161.152.254',
+        	hostname: 'localhost',
             topicList: [],
             checkMore: false,
             nextPage: 1

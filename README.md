@@ -2,7 +2,11 @@
 
 ### 使用方法
 
-* 需手动去往 `app/components/TopicDetail.js` 以及 `app/components/TopicList.js` 里将hostname设置为你本地的IP地址
+* 首先确保你已经全局安装`Node.js`、`webpack`、`webpack-dev-server`
+
+* 如果你连接了WiFi，需前往 `app/components/TopicDetail.js` 以及 `app/components/TopicList.js` 里将hostname设置为你本地的内网IP地址。这样你可以使用连接同一个WiFi的手机来访问你本机的地址，在手机上浏览访问。
+
+* 如果你没有打算通过局域网共享，那么你还是将`app/components/TopicDetail.js` 以及 `app/components/TopicList.js` 修改为'localhost'，这样也能访问。
 
 * 打开客户端
 

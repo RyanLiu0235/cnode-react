@@ -11,7 +11,7 @@ require('../public/less/index');
 var TopicDetail = React.createClass({
     getInitialState: function() {
         return {
-        	hostname: '10.161.152.254',
+        	hostname: 'localhost',
             topicDetail: {
                 topic: {
                     header: {
