@@ -39,7 +39,6 @@ app.get('/getPage', function(req, res) {
 
 app.get('/getTopic', function(req, res) {
     var _topicId = req.query.id;
-    // console.log(_topicId)
     superagent.get('https://cnodejs.org/topic/' + _topicId)
         .end(function(err, sres) {
             if (err) {
@@ -62,8 +61,6 @@ app.get('/getTopic', function(req, res) {
             items.topic.body = {
                 content: $('.topic_content .markdown-text').html()
             }
-
-
             if ($('#content .panel .reply_item').length) {
                 var comment = $('.reply_item');
                 comment.each(function(idx, element) {
