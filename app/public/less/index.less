@@ -1,0 +1,297 @@
+@import './assets/common.less';
+@import './assets/base.less';
+body {
+    position: relative;
+    background-color: #f5f5f5;
+}
+#cnode_container {
+    padding-bottom: 60px;
+}
+// 主题列表
+.topic_list {
+    background-color: #fff;
+    .topic_item {
+        .display(flex);
+        .align-items(center);
+        height: 50px;
+        padding: 0 10px;
+        border-bottom: 1px #e0e0e0 solid;
+        .box-sizing();
+        .user_avatar {
+            position: relative;
+            display: block;
+            width: 30px;
+            margin-right: 5px;
+            .radius(50%);
+            overflow: hidden;
+            &:after {
+                content: '';
+                display: block;
+                width: 100%;
+                padding-top: 100%;
+            }
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+        .topic_title {
+            display: block;
+            .flex();
+            height: 50px;
+            line-height: 50px;
+            margin-right: 5px;
+            color: #333;
+            font-weight: normal;
+            font-size: 14px;
+            overflow: hidden;
+            h4 {
+                .ellipsis();
+            }
+        }
+        .reply_view {
+            font-size: 12px;
+            .reply_number {
+                color: #999;
+            }
+            .view_number {
+                color: #666;
+            }
+        }
+    }
+}
+
+// 返回顶部
+.to_top {
+    position: fixed;
+    display: none;
+    bottom: 20px;
+    right: 20px;
+    z-index: 19;
+    width: 40px;
+    height: 40px;
+    img {
+        display: block;
+        width: 100%;
+    }
+}
+
+// 返回主页
+.to_index {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 19;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(221, 221, 221, 0.8);
+    .radius(50%);
+    img {
+        display: block;
+        width: 100%;
+    }
+}
+
+// 查看更多
+.check_more {
+    display: none;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    background-color: #eaeaea;
+    &.show {
+        display: block;
+    }
+}
+
+// 帖子详情
+.topic_detail {
+    padding: 5px;
+    .topic_header {
+        padding: 10px;
+        border-bottom: 1px #e0e0e0 solid;
+        background-color: #fff;
+        .topic_title {
+            max-height: 40px;
+            line-height: 20px;
+            font-size: 16px;
+            overflow: hidden;
+        }
+        .topic_info {
+            height: 20px;
+            line-height: 20px;
+            margin-top: 5px;
+            span {
+                margin-right: 4px;
+                font-size: 10px;
+                color: #999;
+                &:nth-child(2) {
+                    color: #666;
+                }
+            }
+        }
+    }
+    .topic_body {
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #fff;
+    }
+}
+
+.comment_header {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+}
+
+// 帖子评论
+.comment_list {
+    margin-top: 10px;
+    .comment_item {
+        margin-top: 5px;
+        padding: 10px;
+        border-top: 1px solid #f0f0f0;
+        background-color: #fff;
+        .user_info {
+            .display(flex);
+            .align-items(center);
+            height: 30px;
+            .user_avatar {
+                position: relative;
+                width: 30px;
+                margin-right: 10px;
+                .radius(50%);
+                overflow: hidden;
+                &:after {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    padding-top: 100%;
+                }
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                }
+            }
+            .user_name {
+                margin-right: 5px;
+                font-size: 10px;
+                color: #666;
+            }
+            .time_stamp {
+                font-size: 10px;
+                color: #999;
+            }
+        }
+        .comment_content {
+            margin-top: 6px;
+            .markdown-text {
+                display: none;
+            }
+        }
+    }
+}
+
+// markdown
+.markdown-text {
+    ul,
+    ol {
+        padding: 8px;
+        background-color: #efefef;
+    }
+    p,
+    li {
+        line-height: 18px;
+        margin-top: 15px;
+        font-size: 12px;
+        color: #333;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        &:first-child {
+            margin-top: 0;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+        }
+    }
+    a {
+        color: #06c;
+    }
+    pre {
+        padding: 7px;
+        margin: 4px 0;
+        background-color: #f3f3f3;
+        font-size: 12px;
+        white-space: pre-wrap;
+    }
+    h1 {
+        margin-top: 20px;
+        line-height: 24px;
+        font-size: 20px;
+        color: #000;
+        &~p,
+        &~ul {
+            margin-top: 5px;
+        }
+    }
+    h2 {
+        margin-top: 18px;
+        line-height: 22px;
+        font-size: 18px;
+        color: #000;
+        &~p,
+        &~ul {
+            margin-top: 5px;
+        }
+    }
+    h3 {
+        margin-top: 18px;
+        line-height: 20px;
+        font-size: 16px;
+        font-weight: normal;
+        color: #333;
+        &~p,
+        &~ul {
+            margin-top: 5px;
+        }
+    }
+    h4 {
+        margin-top: 16px;
+        line-height: 18px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+        &~p,
+        &~ul {
+            margin-top: 5px;
+        }
+    }
+    h5 {
+        margin-top: 14px;
+        line-height: 16px;
+        font-size: 12px;
+        font-weight: normal;
+        color: #666;
+        &~p,
+        &~ul {
+            margin-top: 5px;
+        }
+    }
+    blockquote {
+        padding: 0 0 0 15px;
+        margin: 0 0 20px;
+        border-left: 5px solid #eee;
+    }
+}

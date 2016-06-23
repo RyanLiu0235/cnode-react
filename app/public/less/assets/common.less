@@ -1,0 +1,240 @@
+// @维护人：张航
+
+// CSS3前缀
+.display(...){
+    display: @arguments;
+}
+.display(@value)when(@value=flex){
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:@value;
+}
+.display(@value)when(@value=inline-flex){
+    display:-webkit-inline-box;
+    display:-webkit-inline-flex;
+    display:-ms-inline-flexbox;
+    display:@value;
+}
+.flex(@v:1){
+    -webkit-box-flex:@v;
+    -webkit-flex:@v;
+    -ms-flex:@v;
+    flex:@v;
+}
+// 默认加webkit前缀
+.css-prefix(@property,@value){
+    -webkit-@{property}:@value;
+    @{property}:@value;
+}
+// row | column | row-reverse
+// 默认值：column
+.flex-direction(@value)when(@value=row){
+    -ms-flex-direction:@value;
+    .css-prefix(box-orient,horizontal);
+    .css-prefix(flex-direction,@value);
+}
+.flex-direction(@value:column)when(default()){
+    -ms-flex-direction:@value;
+    .css-prefix(box-orient,vertical);
+    .css-prefix(flex-direction,@value);
+}
+.flex-direction(@value)when(@value=row-reverse){
+    -ms-flex-direction:@value;
+    .css-prefix(box-direction,reverse);
+    .css-prefix(flex-direction,@value);
+}
+// flex-start | flex-end | center | space-between
+// 默认值：center
+.justify-content(@value)when(@value=flex-start){
+    -ms-flex-pack:start;
+    .css-prefix(box-pack,start);
+    .css-prefix(justify-content,@value);
+}
+.justify-content(@value)when(@value=flex-end){
+    -ms-flex-pack:end;
+    .css-prefix(box-pack,end);
+    .css-prefix(justify-content,@value);
+}
+.justify-content(@value:center)when(default()){
+    -ms-flex-pack:@value;
+    .css-prefix(box-pack,@value);
+    .css-prefix(justify-content,@value);
+}
+.justify-content(@value)when(@value=space-between){
+    -ms-flex-pack:justify;
+    .css-prefix(box-pack,justify);
+    .css-prefix(justify-content,@value);
+}
+// flex-start | flex-end | center | stretch
+// 默认值：center
+.align-items(@value)when(@value=flex-start){
+    -ms-flex-align:start;
+    .css-prefix(box-align,start);
+    .css-prefix(align-items,@value);
+}
+.align-items(@value)when(@value=flex-end){
+    -ms-flex-align:end;
+    .css-prefix(box-align,end);
+    .css-prefix(align-items,@value);
+}
+.align-items(@value:center)when(default()){
+    -ms-flex-align:@value;
+    .css-prefix(box-align,@value);
+    .css-prefix(align-items,@value);
+}
+.align-items(@value)when(@value=stretch){
+    -ms-flex-align:@value;
+    .css-prefix(box-align,@value);
+    .css-prefix(align-items,@value);
+}
+.radius(@x:5px){
+    -webkit-border-radius: @x;
+    border-radius: @x;
+}
+.box-shadow(@shadow:0 0 5px #ccc){
+    box-shadow:@shadow;
+    -webkit-box-shadow:@shadow;
+}
+.box-sizing(@style:border-box){
+    -webkit-box-sizing: @style;
+    box-sizing:@style;
+}
+.transform-origin(...){
+    -webkit-transform-origin:@arguments;
+    transform-origin:@arguments;
+}
+.transform(@arg){
+    -webkit-transform:@arg;
+    -ms-transform:@arg;
+    transform:@arg;
+}
+// 转换，连写
+// .transform(rotate(45deg) scale(.5);join);
+.transform(@arg;@join)when(@join=join){
+    -webkit-transform:@arg;
+    transform:@arg;
+}
+.translate(@x:0; @y:0){
+    .transform(translate(@x, @y));
+}
+.translate3d(@x:0; @y:0; @z:0){
+    .transform(translate3d(@x, @y, @z));
+}
+.rotate(@degree:0){
+    .transform(rotate(@degree));
+}
+.rotate3d(@x:0; @y:0; @z:0; @degree:0){
+    .transform(rotate3d(@x, @y, @z, @degree));
+}
+.scale(@num:1){
+    .transform(scale(@num));
+}
+.scale3d(@x:1; @y:1; @z:1){
+    .transform(scale3d(@x, @y, @z));
+}
+.skew(@x:0; @y:0){
+    .transform(skew(@x, @y));
+}
+// 过渡
+// .transition(all 0.5s ease);
+// .transition(visibility,opacity 0.5s;);
+// .transition(transform 0.5s;true);
+.transition(@arg){
+    -webkit-transition:@arg;
+    transition:@arg;
+}
+.transition(@arg;@prefix)when(@prefix=true){
+    -webkit-transition:e("-webkit-@{arg}");
+    transition:@arg;
+}
+// 线性渐变
+// 解决角度为0时没有加deg的bug
+.linear-gradient(@degree; @colors)when(@degree=0){
+    background-image: -webkit-linear-gradient(@degree,@colors);
+    background-image: -ms-linear-gradient(@degree,@colors);
+    background-image: linear-gradient(90deg,@colors);
+}
+// 线性渐变
+// .linear-gradient(60deg; #000, #fff);
+.linear-gradient(@degree; @colors)when(default()){
+    @degreeW3c : 90 - @degree;
+    background-image: -webkit-linear-gradient(@degree,@colors);
+    background-image: -ms-linear-gradient(@degree,@colors);
+    background-image: linear-gradient(@degreeW3c,@colors);
+}
+.animation(...){
+    -webkit-animation:@arguments;
+    animation:@arguments;
+}
+.user-select(@select: text){
+    -webkit-user-select:@select;
+    -ms-user-select:@select;
+    user-select:@select;
+}
+
+// 简写
+.clearfix(){
+    &:after{
+        content:"";
+        display:table;
+        clear:both;
+    }
+}
+.ellipsis(){
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+// padding比例缩放
+// .padding-propor(2/3);
+.padding-propor(@arg:1){
+    position: relative;
+    &:after{
+        content: '';
+        display: block;
+        width: 100%;
+        padding-top: percentage(@arg);
+    }
+}
+// 媒体查询改变html字号rem，前面是屏幕尺寸，后面是字号
+// .media-rem(320px;100px);
+.media-rem(@width:320px; @htmlSize:10px){
+    @media (min-width: @width){
+        font-size: @width / (320/@htmlSize);
+    }
+}
+// 默认背景图 20160506
+// .default-avatar(); 大图
+// .default-avatar(30px;auto); 小图
+.default-avatar(@x:60px){
+    background: url(http://d10.yihaodianimg.com/N10/M05/F2/52/ChEi2lbg5SiAFaAlAAAFzCOcVRc93200.png) center no-repeat;
+    background-size: @x auto;
+}
+
+// 废弃，禁止使用
+.ell(){
+    .ellipsis();
+}
+.flexbox(){
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex;
+}
+.flexbox_column(){
+    -webkit-box-orient:vertical;
+    -webkit-flex-direction:column;
+    -ms-flex-direction:column;
+    flex-direction:column;
+}
+.flexbox_center(){
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+.gradient(@path; @colorX; @colorY){
+    background-image: -webkit-linear-gradient(@path, @colorX, @colorY);
+    background-image:-ms-linear-gradient(@path, @colorX, @colorY);
+    background-image: linear-gradient(@path, @colorX, @colorY);
+}
