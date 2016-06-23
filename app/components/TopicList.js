@@ -14,7 +14,7 @@ var TopicList = React.createClass({
     },
     componentDidMount: function() {
         $.ajax({
-            url: 'http://' + this.state.hostname + ':3000/getPage',
+            url: 'http://' + this.state.hostname + ':5001/getPage',
             type: 'GET',
             dataType: 'jsonp',
             data: {
@@ -34,7 +34,7 @@ var TopicList = React.createClass({
     },
     checkMore: function() {
         $.ajax({
-            url: 'http://' + this.state.hostname + ':3000/getPage',
+            url: 'http://' + this.state.hostname + ':5001/getPage',
             type: 'GET',
             dataType: 'jsonp',
             data: {

@@ -31,7 +31,7 @@ var TopicDetail = React.createClass({
     },
     componentDidMount: function() {
         $.ajax({
-            url: 'http://' + this.state.hostname + ':3000/getTopic',
+            url: 'http://' + this.state.hostname + ':5001/getTopic',
             type: 'GET',
             dataType: 'jsonp',
             data: {
