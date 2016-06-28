@@ -8,7 +8,6 @@
 
 * 如果你没有打算通过局域网共享，那么你还是将`app/components/TopicDetail.js` 以及 `app/components/TopicList.js` 修改为'localhost'，这样也能访问。
 
-
 * 打开客户端
 
 ``` sh
