@@ -12,21 +12,8 @@ var TopicDetail = React.createClass({
     getInitialState: function() {
         return {
         	hostname: 'localhost',
-            topicDetail: {
-                topic: {
-                    header: {
-                        title: '',
-                        timeStamp: '',
-                        view: '',
-                        author: ''
-                    },
-
-                    body: {
-                        content: ''
-                    }
-                },
-                comment: []
-            }
+            topicBody: '',
+            topicReply: []
         };
     },
     componentDidMount: function() {
@@ -40,22 +27,24 @@ var TopicDetail = React.createClass({
             success: function(topicDetail) {
                 if (this.isMounted()) {
                     this.setState({
-                        topicDetail: topicDetail
+                        topicBody: topicDetail.content,
+                        topicReply: topicDetail.replies
                     });
                 }
             }.bind(this)
-        })
+        });
+
+        
     },
     render: function() {
         return ( 
         	<div className = "topic_detail">
 	            <div>
-	            	<TopicHeader dataHeader = { this.state.topicDetail.topic.header }/> 
-	            	<TopicBody dataBody = { this.state.topicDetail.topic.body }/> 
+	            	<TopicBody dataBody = { this.state.topicBody }/> 
 	        	</div> 
 	        	<div>
 	        		<div className = "comment_header">评论列表</div> 
-	        		<CommentList dataComment = { this.state.topicDetail.comment }/> 
+	        		<CommentList dataReply = { this.state.topicReply }/> 
 	    		</div> 
 	    		<BackToTop />
 	            <BackToIndex />

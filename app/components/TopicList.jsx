@@ -51,23 +51,19 @@ var TopicList = React.createClass({
     },
     render: function() {
         var _list = this.state.topicList.map(function(item) {
-            // 获取文章链接的字符串作为key
-            var reg = /\/topic\/(.+)/;
-            reg.exec(item.title.href);
-            var topicId = RegExp.$1;
-
+            var topicLink = '/topic/' + item.id;
             return ( 
-            	<div className="topic_item" key={ topicId }>
+            	<div className="topic_item" key={ item.id }>
 	                <div className="user_avatar">
-		                <img src={ item.user.img }/> 
+		                <img src={ item.author.avatar_url }/> 
 	                </div> 
-	                <Link to={ item.title.href } className="topic_title">
-	                	<h4> { item.title.content } </h4> 
+	                <Link to={ topicLink } className="topic_title">
+	                	<h4> { item.title } </h4> 
 	                </Link> 
 	                <div className="reply_view">
-		                <span className="reply_number"> { item.replyView.reply } </span> 
-		                <span className="seperate"> /</span>
-		                <span className="view_number"> { item.replyView.view } </span> 
+		                <span className="reply_number"> { item.reply_count } </span> 
+		                <span className="seperate">/</span>
+		                <span className="view_number"> { item.visit_count} </span> 
 	                </div> 
                 </div>
             )

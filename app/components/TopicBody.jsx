@@ -4,13 +4,11 @@ var React = require('react'),
 var TopicBody = React.createClass({
 	componentDidUpdate: function() {
 	    var topicBody = this.refs.topicBody;
-		$(topicBody).html(this.props.dataBody.content);
+		$(topicBody).html(this.props.dataBody);
 	},
 	render: function() {
 		return (
-			<div className="topic_body">
-				<div ref="topicBody" className="markdown-text">
-				</div>
+			<div ref="topicBody" className="topic_body">
 			</div>
 		);
 	}

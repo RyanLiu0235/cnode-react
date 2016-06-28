@@ -4,37 +4,32 @@ var React = require('react'),
 var CommentList = React.createClass({
 	
 	componentDidUpdate: function() {
-		var _c = $('.comment_content .markdown-text');
+		var _c = $('.comment_content');
 		_c.each(function(i, el) {
-			// console.log(el)
-			var _comment = $(el).text();
-			$(el).html(_comment).show();
+			$(el).html($(el).text());
 		});
 	},
 	render: function() {
-		var c = this.props.dataComment;
-		// console.log(c)
-		var commentList = c.map(function(item) {
+		var ReplyList = this.props.dataReply.map(function(item) {
+
 			return (
 				<div className="comment_item" key={item.id}>	
 					<div className="user_info">
 						<div className="user_avatar">
-							<img src={item.author.img} />
+							<img src={item.author.avatar_url} />
 						</div>
-						<div className="user_name">{item.author.name}</div>
-						<div className="time_stamp">{item.author.time}</div>
+						<div className="user_name">{item.author.loginname}</div>
+						<div className="time_stamp">{item.create_at}</div>
 					</div>
 					<div className="comment_content">
-						<div className="markdown-text" ref="commentBody" >
-							{item.reply}
-						</div>
+						{item.content}
 					</div>
 				</div>
 			)
 		})
 		return (
 			<div className="comment_list">
-				{commentList}
+				{ReplyList}
 			</div>
 		);
 	}
