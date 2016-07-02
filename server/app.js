@@ -1,30 +1,34 @@
 var express = require('express');
-var cheerio = require('cheerio');
 var superagent = require('superagent');
 var os = require('os');
+var cors = require('cors');
 
 var app = express();
 
+app.use(cors());
+
 app.get('/getPage', function(req, res) {
     var _page = req.query.page;
-    superagent.get('http://cnodejs.org/api/v1/topics?page=' + _page)
+    superagent
+        .get('http://cnodejs.org/api/v1/topics?page=' + _page)
         .end(function(err, resp) {
             if (err) {
                 return console.error(err);
             }
-            res.jsonp(resp.body.data);
+            res.json(resp.body.data);
         });
 });
 
 
 app.get('/getTopic/', function(req, res) {
     var _topicId = req.query.id;
-    superagent.get('http://cnodejs.org/api/v1/topic/' + _topicId)
+    superagent
+        .get('http://cnodejs.org/api/v1/topic/' + _topicId)
         .end(function(err, resp) {
             if (err) {
                 return console.error(err);
             }
-            res.jsonp(resp.body.data);
+            res.json(resp.body.data);
         });
 })
 

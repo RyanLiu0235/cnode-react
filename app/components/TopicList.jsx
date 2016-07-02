@@ -1,7 +1,7 @@
 var React = require('react'),
     Link = require('react-router').Link,
     BackToTop = require('./BackToTop'),
-    $ = require('jquery');
+    superagent = require('superagent');
 
 var TopicList = React.createClass({
     getInitialState: function() {
@@ -13,14 +13,15 @@ var TopicList = React.createClass({
         };
     },
     componentDidMount: function() {
-        $.ajax({
-            url: 'http://' + this.state.hostname + ':5001/getPage',
-            type: 'GET',
-            dataType: 'jsonp',
-            data: {
-                page: this.state.nextPage
-            },
-            success: function(topicList) {
+        var _nextPage = this.state.nextPage;
+        superagent
+            .get('http://' + this.state.hostname + ':5001/getPage?page=' + _nextPage)
+            .end(function(err, data) {
+                var topicList = data.body;
+                if (err) {
+                    console.error(err);
+                    return;
+                }
                 if (this.isMounted()) {
                     this.setState({
                         topicList: topicList,
@@ -28,26 +29,25 @@ var TopicList = React.createClass({
                         nextPage: 2
                     });
                 }
-                    
-            }.bind(this)
-        });
+
+            }.bind(this));
     },
     checkMore: function() {
-        $.ajax({
-            url: 'http://' + this.state.hostname + ':5001/getPage',
-            type: 'GET',
-            dataType: 'jsonp',
-            data: {
-                page: this.state.nextPage
-            },
-            success: function(topicList) {
-                var _topicList = this.state.topicList.concat(topicList);
+        var _nextPage = this.state.nextPage;
+        superagent
+            .get('http://' + this.state.hostname + ':5001/getPage?page=' + _nextPage)
+            .end(function(err, data) {
+                var topicList = this.state.topicList.concat(data.body);
+                if (err) {
+                    console.error(err);
+                    return;
+                }
                 this.setState({
-                    topicList: _topicList,
+                    topicList: topicList,
                     nextPage: (this.state.nextPage + 1)
                 });
-            }.bind(this)
-        });
+
+            }.bind(this));
     },
     render: function() {
         var _list = this.state.topicList.map(function(item) {

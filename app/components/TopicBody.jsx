@@ -1,10 +1,9 @@
-var React = require('react'),
-	$ = require('jquery');
+var React = require('react');
 
 var TopicBody = React.createClass({
 	componentDidUpdate: function() {
 	    var topicBody = this.refs.topicBody;
-		$(topicBody).html(this.props.dataBody);
+	    topicBody.innerHTML = this.props.dataBody;
 	},
 	render: function() {
 		return (

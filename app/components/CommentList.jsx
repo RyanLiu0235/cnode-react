@@ -1,13 +1,12 @@
-var React = require('react'),
-	$ = require('jquery');
+var React = require('react');
 
 var CommentList = React.createClass({
 	
 	componentDidUpdate: function() {
-		var _c = $('.comment_content');
-		_c.each(function(i, el) {
-			$(el).html($(el).text());
-		});
+		var _c = document.querySelectorAll('.comment_content');
+		_c.forEach(function(el, i) {
+			el.innerHTML = el.innerText;
+		})
 	},
 	render: function() {
 		var ReplyList = this.props.dataReply.map(function(item) {

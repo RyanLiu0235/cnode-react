@@ -1,5 +1,4 @@
-var React = require('react'),
-	$ = require('jquery');
+var React = require('react');
 
 var BackToIndex = React.createClass({
 	render: function() {

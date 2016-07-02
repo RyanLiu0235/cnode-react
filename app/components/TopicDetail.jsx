@@ -1,5 +1,5 @@
 var React = require('react'),
-    $ = require('jquery'),
+    superagent = require('superagent'),
     BackToTop = require('./BackToTop'),
     BackToIndex = require('./BackToIndex'),
     TopicHeader = require('./TopicHeader'),
@@ -17,24 +17,23 @@ var TopicDetail = React.createClass({
         };
     },
     componentDidMount: function() {
-        $.ajax({
-            url: 'http://' + this.state.hostname + ':5001/getTopic',
-            type: 'GET',
-            dataType: 'jsonp',
-            data: {
-                id: this.props.params.id
-            },
-            success: function(topicDetail) {
+        var _id = this.props.params.id;
+        superagent
+            .get('http://' + this.state.hostname + ':5001/getTopic?id=' + _id)
+            .end(function(err, data) {
+                var topicDetail = data.body;
+                if (err) {
+                    console.error(err);
+                    return;
+                }
                 if (this.isMounted()) {
                     this.setState({
                         topicBody: topicDetail.content,
                         topicReply: topicDetail.replies
                     });
                 }
-            }.bind(this)
-        });
 
-        
+            }.bind(this));
     },
     render: function() {
         return ( 

@@ -1,24 +1,23 @@
-var React = require('react'),
-	$ = require('jquery');
+var React = require('react');
 
 var BackToTop = React.createClass({
 	backToTop: function(e) {
-		$('body,html').animate({ scrollTop: 0 }, 500);
-        $(e.target).closest('a').fadeOut();
+  		document.body.scrollTop = 0;
+  		e.target.parentNode('a').style.display = 'none';
 	},
 	componentDidMount: function() {
 	    // 返回顶部
-	    $(window).on('scroll', function() {
-	        var _h = $(window).height(),
-	            _top = $(window).scrollTop(),
-	            $toTop = $('.to_top');
+	    window.onscroll = function() {
+	    	var _h = document.body.clientHeight,
+	    		_top = document.body.scrollTop,
+	    		$toTop = document.querySelector('.to_top');
 
-	        if (_top >= (_h + 100)) {
-	            $toTop.show();
+	    	if (_top >= (_h + 100)) {
+	            $toTop.style.display = 'block';
 	        } else {
-	            $toTop.hide();
+	            $toTop.style.display = 'none';
 	        }
-	    });  
+	    }
 	},
 	render: function() {
 		return (

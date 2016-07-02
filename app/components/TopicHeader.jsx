@@ -1,10 +1,8 @@
-var React = require('react'),
-	$ = require('jquery');
+var React = require('react');
 
 var TopicHeader = React.createClass({
 	
 	render: function() {
-		// console.log(this.props)
 		var h = this.props.dataHeader;
 		return (
 			<div className="topic_header">
