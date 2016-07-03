@@ -1,13 +1,6 @@
 var React = require('react');
 
 var CommentList = React.createClass({
-	
-	componentDidUpdate: function() {
-		var _c = document.querySelectorAll('.comment_content');
-		_c.forEach(function(el, i) {
-			el.innerHTML = el.innerText;
-		})
-	},
 	render: function() {
 		var ReplyList = this.props.dataReply.map(function(item) {
 
@@ -21,7 +14,7 @@ var CommentList = React.createClass({
 						<div className="time_stamp">{item.create_at}</div>
 					</div>
 					<div className="comment_content">
-						{item.content}
+						<div dangerouslySetInnerHTML={{__html: item.content}} />
 					</div>
 				</div>
 			)

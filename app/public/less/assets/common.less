@@ -1,4 +1,4 @@
-// @维护人：张航
+// @维护人：张航 url: https://github.com/ximan
 
 // CSS3前缀
 .display(...){
@@ -210,31 +210,4 @@
 .default-avatar(@x:60px){
     background: url(http://d10.yihaodianimg.com/N10/M05/F2/52/ChEi2lbg5SiAFaAlAAAFzCOcVRc93200.png) center no-repeat;
     background-size: @x auto;
-}
-
-// 废弃，禁止使用
-.ell(){
-    .ellipsis();
-}
-.flexbox(){
-    display:-webkit-box;
-    display:-webkit-flex;
-    display:-ms-flexbox;
-    display:flex;
-}
-.flexbox_column(){
-    -webkit-box-orient:vertical;
-    -webkit-flex-direction:column;
-    -ms-flex-direction:column;
-    flex-direction:column;
-}
-.flexbox_center(){
-    -webkit-box-orient: horizontal;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
-}
-.gradient(@path; @colorX; @colorY){
-    background-image: -webkit-linear-gradient(@path, @colorX, @colorY);
-    background-image:-ms-linear-gradient(@path, @colorX, @colorY);
-    background-image: linear-gradient(@path, @colorX, @colorY);
 }
