@@ -3,7 +3,6 @@ var React = require('react');
 var BackToTop = React.createClass({
 	backToTop: function(e) {
   		document.body.scrollTop = 0;
-  		e.target.style.display = 'none';
 	},
 	scrollToTop: function() {
 		var _h = window.screen.height,
@@ -11,7 +10,6 @@ var BackToTop = React.createClass({
     		$toTop = document.querySelector('.to_top');
 
     	if (_top >= (_h + 100)) {
-
             $toTop.style.display = 'block';
         } else {
             $toTop.style.display = 'none';
