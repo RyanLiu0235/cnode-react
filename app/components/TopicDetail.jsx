@@ -13,6 +13,7 @@ var TopicDetail = React.createClass({
         return {
         	hostname: 'localhost',
             topicBody: '',
+            topicHeader: {},
             topicReply: []
         };
     },
@@ -28,6 +29,13 @@ var TopicDetail = React.createClass({
                 }
                 if (this.isMounted()) {
                     this.setState({
+                        topicHeader: {
+                            title: topicDetail.title,
+                            reply: topicDetail.reply_count,
+                            read: topicDetail.visit_count,
+                            create: topicDetail.create_at,
+                            author: topicDetail.author.loginname
+                        },
                         topicBody: topicDetail.content,
                         topicReply: topicDetail.replies
                     });
@@ -39,11 +47,12 @@ var TopicDetail = React.createClass({
         return ( 
         	<div className = "topic_detail">
 	            <div>
-	            	<TopicBody dataBody = { this.state.topicBody }/> 
+                    <TopicHeader dataHeader={this.state.topicHeader} />
+	            	<TopicBody dataBody={ this.state.topicBody }/> 
 	        	</div> 
 	        	<div>
-	        		<div className = "comment_header">评论列表</div> 
-	        		<CommentList dataReply = { this.state.topicReply }/> 
+	        		<div className="comment_header">评论列表</div> 
+	        		<CommentList dataReply={ this.state.topicReply }/> 
 	    		</div> 
 	    		<BackToTop />
 	            <BackToIndex />
