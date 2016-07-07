@@ -4,7 +4,7 @@ var React = require('react'),
 var CommentList = React.createClass({
 	render: function() {
 		var commentList = this.props.dataReply.length;
-		var ReplyList = this.props.dataReply.map(function(item) {
+		var ReplyList = this.props.dataReply.map(function(item, index) {
 
 			return (
 				<div className="comment_item" key={item.id}>	
@@ -14,6 +14,7 @@ var CommentList = React.createClass({
 						</div>
 						<div className="user_name">{item.author.loginname}</div>
 						<div className="time_stamp">{timeFormat(item.create_at)}</div>
+						<div className="floor">{index + 1}楼</div>
 					</div>
 					<div className="comment_content">
 						<div dangerouslySetInnerHTML={{__html: item.content}} />
