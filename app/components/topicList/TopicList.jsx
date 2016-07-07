@@ -1,12 +1,12 @@
 var React = require('react'),
     Link = require('react-router').Link,
-    BackToTop = require('./BackToTop'),
+    BackToTop = require('../common/BackToTop'),
     superagent = require('superagent');
 
 var TopicList = React.createClass({
     getInitialState: function() {
         return {
-        	hostname: 'localhost',
+        	hostname: '10.161.152.102',
             topicList: [],
             checkMore: false,
             nextPage: 1
@@ -73,7 +73,6 @@ var TopicList = React.createClass({
 	            <div className="topic_list"> 
 	            	{ _list } 
 	            	<a href = "javascript:;" onClick={ this.checkMore } className={ this.state.checkMore ? "check_more show" : "check_more" }> 查看更多 </a>
-
 	            </div>
 	            <BackToTop />
             </div>

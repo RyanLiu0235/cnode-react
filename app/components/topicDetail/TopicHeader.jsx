@@ -1,5 +1,5 @@
 var React = require('react'),
-	timeFormat = require('../utils').timeFormat;
+	timeFormat = require('../../utils').timeFormat;
 
 var TopicHeader = React.createClass({
 	

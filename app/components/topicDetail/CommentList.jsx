@@ -1,8 +1,9 @@
 var React = require('react'),
-	timeFormat = require('../utils').timeFormat;
+	timeFormat = require('../../utils').timeFormat;
 
 var CommentList = React.createClass({
 	render: function() {
+		var commentList = this.props.dataReply.length;
 		var ReplyList = this.props.dataReply.map(function(item) {
 
 			return (
@@ -20,9 +21,13 @@ var CommentList = React.createClass({
 				</div>
 			)
 		})
+
 		return (
-			<div className="comment_list">
-				{ReplyList}
+			<div>
+				<div className="comment_header">{!!commentList ? '评论列表' : '暂无评论'}</div> 
+				<div className="comment_list">
+					{ReplyList}
+				</div>
 			</div>
 		);
 	}

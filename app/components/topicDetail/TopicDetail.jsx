@@ -1,17 +1,15 @@
 var React = require('react'),
     superagent = require('superagent'),
-    BackToTop = require('./BackToTop'),
-    BackToIndex = require('./BackToIndex'),
+    BackToTop = require('../common/BackToTop'),
+    BackToIndex = require('../common/BackToIndex'),
     TopicHeader = require('./TopicHeader'),
     TopicBody = require('./TopicBody'),
     CommentList = require('./CommentList');
 
-require('../public/less/index');
-
 var TopicDetail = React.createClass({
     getInitialState: function() {
         return {
-        	hostname: 'localhost',
+        	hostname: '10.161.152.102',
             topicBody: '',
             topicHeader: {},
             topicReply: []
@@ -50,10 +48,7 @@ var TopicDetail = React.createClass({
                     <TopicHeader dataHeader={this.state.topicHeader} />
 	            	<TopicBody dataBody={ this.state.topicBody }/> 
 	        	</div> 
-	        	<div>
-	        		<div className="comment_header">评论列表</div> 
-	        		<CommentList dataReply={ this.state.topicReply }/> 
-	    		</div> 
+        		<CommentList dataReply={ this.state.topicReply }/> 
 	    		<BackToTop />
 	            <BackToIndex />
             </div>

@@ -3,14 +3,15 @@ var React = require('react');
 var BackToTop = React.createClass({
 	backToTop: function(e) {
   		document.body.scrollTop = 0;
-  		e.target.parentNode('a').style.display = 'none';
+  		e.target.style.display = 'none';
 	},
 	scrollToTop: function() {
-		var _h = document.body.clientHeight,
+		var _h = window.screen.height,
     		_top = document.body.scrollTop,
     		$toTop = document.querySelector('.to_top');
 
     	if (_top >= (_h + 100)) {
+
             $toTop.style.display = 'block';
         } else {
             $toTop.style.display = 'none';
@@ -18,7 +19,7 @@ var BackToTop = React.createClass({
 	},
 	componentDidMount: function() {
 	    // 返回顶部
-	    window.addEventListener('onscroll', this.scrollToTop, false);
+	    window.addEventListener('scroll', this.scrollToTop, false);
 	},
 	render: function() {
 		return (
