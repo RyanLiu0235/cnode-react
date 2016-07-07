@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+	timeFormat = require('../utils').timeFormat;
 
 var TopicHeader = React.createClass({
 	
@@ -9,7 +10,7 @@ var TopicHeader = React.createClass({
 				<h2 className="topic_title">{h.title}</h2>
 				<div className="topic_info">
 			        <span>{h.author}</span>
-			        <span>{h.create}</span>
+			        <span>{timeFormat(h.create)}</span>
 			        <span>{h.reply} / {h.read}</span>
 		      	</div>
 			</div>

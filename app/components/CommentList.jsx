@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+	timeFormat = require('../utils').timeFormat;
 
 var CommentList = React.createClass({
 	render: function() {
@@ -11,7 +12,7 @@ var CommentList = React.createClass({
 							<img src={item.author.avatar_url} />
 						</div>
 						<div className="user_name">{item.author.loginname}</div>
-						<div className="time_stamp">{item.create_at}</div>
+						<div className="time_stamp">{timeFormat(item.create_at)}</div>
 					</div>
 					<div className="comment_content">
 						<div dangerouslySetInnerHTML={{__html: item.content}} />
