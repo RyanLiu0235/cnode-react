@@ -13,8 +13,29 @@ body {
 #cnode_container {
     padding-bottom: 60px;
 }
+// 顶部导航
+.nav_bar {
+    .display(flex);
+    height: 40px;
+    padding: 5px;
+    background-color: #fff;
+    .nav_item {
+        display: block;
+        .flex();
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+        &.cur {
+            background-color: #e0e0e0;
+        }
+    }
+}
+
 // 主题列表
 .topic_list {
+    margin-top: 10px;
     background-color: #fff;
     .topic_item {
         .display(flex);
@@ -102,7 +123,7 @@ body {
 
 // 查看更多
 .check_more {
-    display: none;
+    display: block;
     height: 40px;
     line-height: 40px;
     margin-top: 20px;

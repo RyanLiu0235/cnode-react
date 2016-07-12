@@ -9,8 +9,10 @@ app.use(cors());
 
 app.get('/getPage', function(req, res) {
     var _page = req.query.page;
+    var _tab = req.query.tab;
+    console.log(_page, _tab)
     superagent
-        .get('http://cnodejs.org/api/v1/topics?page=' + _page)
+        .get('http://cnodejs.org/api/v1/topics?page=' + _page + '&tab=' + _tab)
         .end(function(err, resp) {
             if (err) {
                 return console.error(err);

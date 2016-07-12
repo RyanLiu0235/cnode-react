@@ -9,7 +9,7 @@ var React = require('react'),
 var TopicDetail = React.createClass({
     getInitialState: function() {
         return {
-        	hostname: '10.161.152.102',
+        	hostname: 'localhost',
             topicBody: '',
             topicHeader: {},
             topicReply: []

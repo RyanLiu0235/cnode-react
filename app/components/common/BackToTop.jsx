@@ -22,7 +22,7 @@ var BackToTop = React.createClass({
 	render: function() {
 		return (
 			<div onClick={this.backToTop} className="to_top">
-				<img src="./public/img/toTop.png" />
+				<img src="/public/img/toTop.png" />
 			</div>
 		);
 	}
