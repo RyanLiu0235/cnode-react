@@ -15,7 +15,6 @@ var IndexPage = React.createClass({
     componentDidMount: function() {
         var _nextPage = this.state.nextPage;
         var _tab = this.props.location.query.tab || 'all';
-        console.log(_tab)
         superagent
             .get('http://' + this.state.hostname + ':5001/getPage?page=' + _nextPage + '&tab=' + _tab)
             .end(function(err, data) {
