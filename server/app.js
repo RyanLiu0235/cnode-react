@@ -2,15 +2,18 @@ var express = require('express');
 var superagent = require('superagent');
 var os = require('os');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 
 var app = express();
 
 app.use(cors());
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.get('/getPage', function(req, res) {
     var _page = req.query.page;
     var _tab = req.query.tab;
-    console.log(_page, _tab)
     superagent
         .get('http://cnodejs.org/api/v1/topics?page=' + _page + '&tab=' + _tab)
         .end(function(err, resp) {

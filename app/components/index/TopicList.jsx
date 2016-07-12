@@ -1,8 +1,7 @@
 var React = require('react'),
     Link = require('react-router').Link,
     BackToTop = require('../common/BackToTop'),
-    NavBar = require('./NavBar'),
-    superagent = require('superagent');
+    NavBar = require('./NavBar');
 
 var TopicList = React.createClass({
     render: function() {
@@ -28,7 +27,7 @@ var TopicList = React.createClass({
         	<div>
 	            <div className="topic_list">
 	            	{ _list } 
-	            	<a href = "javascript:;" onClick={ this.props.checkMore } className="check_more"> 查看更多 </a>
+	            	<span onClick={ this.props.checkMore } className="check_more"> 查看更多 </span>
 	            </div>
 	            <BackToTop />
             </div>
