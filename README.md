@@ -1,5 +1,9 @@
 # CNode社区网页客户端 —— React版
 
+### Warning
+
+这是当初为了练手`React`与`React-Router`而写的项目，现在停止更新。
+
 ### 使用方法
 
 * 首先确保你已经全局安装`Node.js`、`webpack`、`webpack-dev-server`
