@@ -25,15 +25,15 @@ class NavBar extends Component {
   render() {
     const navList = list.map(item => {
       return (
-        <NavLink activeClassName="cur" className="nav_item" to={"/?tab=" + item.name} key={item.name}>
-					{item.text}
-				</NavLink>
+        <NavLink activeClassName="cur" className="nav_item" to={"/tab/" + item.name} key={item.name}>
+          {item.text}
+        </NavLink>
       )
     })
     return (
       <div className="nav_bar">
-				{navList}
-			</div>
+        {navList}
+      </div>
     )
   }
 }
