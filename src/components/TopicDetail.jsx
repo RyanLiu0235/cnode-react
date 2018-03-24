@@ -66,20 +66,18 @@ class TopicDetail extends Component {
     })
     return (
       <div className="topic_detail">
-        <div>
-          <div className="topic_header">
-            <h2 className="topic_title">{title}</h2>
-            <div className="topic_info">
-              <span>{author.loginname}</span>
-              <span>{format(create_at)}</span>
-              <span>{reply_count} / {visit_count}</span>
-            </div>
-          </div>
-          <div ref="topicBody" className="topic_body">
-            <div dangerouslySetInnerHTML={{__html: content}} />
+        <div className="topic_header">
+          <h2 className="topic_title">{title}</h2>
+          <div className="topic_info">
+            <span>{author.loginname}</span>
+            <span>{format(create_at)}</span>
+            <span>{reply_count} / {visit_count}</span>
           </div>
         </div>
-        <div>
+        <div ref="topicBody" className="topic_body">
+          <div dangerouslySetInnerHTML={{__html: content}} />
+        </div>
+        <div className="topic_comment">
           <div className="comment_header">{!!commentList ? '评论列表' : '暂无评论'}</div>
           <div className="comment_list">{ReplyList}</div>
         </div>

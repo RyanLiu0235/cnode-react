@@ -26,11 +26,9 @@ class TopicList extends Component {
       )
     })
     return (
-      <div>
-        <div className="topic_list">
-          { topicList }
-          <span onClick={ this.props.loadMore } className="load_more">查看更多</span>
-        </div>
+      <div className="topic_list">
+        { topicList }
+        <span onClick={ this.props.loadMore } className="load_more">查看更多</span>
       </div>
     )
   }

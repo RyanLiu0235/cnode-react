@@ -22,17 +22,34 @@ const list = [{
 }]
 
 class NavBar extends Component {
+  goBack() {
+    window.history.back()
+  }
   render() {
     const navList = list.map(item => {
       return (
-        <NavLink activeClassName="cur" className="nav_item" to={"/tab/" + item.name} key={item.name}>
+        <NavLink activeClassName="cur" className="tab_item" to={"/tab/" + item.name} key={item.name}>
           {item.text}
         </NavLink>
       )
     })
+    const loginBox = <NavLink className="tab_item" to="/signin">登录</NavLink>
     return (
-      <div className="nav_bar">
-        {navList}
+      <div className="panel">
+        <div className="header_container">
+          <div className="back_button" onClick={this.goBack}></div>
+          <div className="tab_list">
+            {navList}
+          </div>
+          <div className="login">
+            {loginBox}
+            {/*<a v-if="!loginname" className="tab_item" v-link="{ path: '/signin' }">登录</a>
+            <a v-if="loginname" className=" user_name" v-link="{ path: '/user/' + loginname }">
+              <img :src="avatar_url" alt={} />
+              <i v-if="unread > 0" className="unread_num">{{ unread }}</i>
+            </a>*/}
+          </div>
+        </div>
       </div>
     )
   }
