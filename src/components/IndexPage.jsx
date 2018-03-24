@@ -26,13 +26,13 @@ class IndexPage extends Component {
     } = parse(this.props.location.search.substr(1))
 
     superagent
-      .get('https://cnodejs.org/api/v1/topics?page=' + nextPage + '&tab=' + tab)
+      .get(`https://cnodejs.org/api/v1/topics?page=${nextPage}&tab=${tab}`)
       .end(function(err, data) {
         if (err) {
           console.error(err)
           return
         }
-        const topicList = data.body
+        const topicList = data.body.data
         this.setState({
           topicList,
           checkMore: true,
