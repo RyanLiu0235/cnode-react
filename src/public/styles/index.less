@@ -89,37 +89,6 @@ body {
   }
 }
 
-// 返回顶部
-.to_top {
-  position: fixed;
-  display: none;
-  bottom: 20px;
-  right: 20px;
-  z-index: 19;
-  width: 40px;
-  height: 40px;
-  img {
-    display: block;
-    width: 100%;
-  }
-}
-
-// 返回主页
-.to_index {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 19;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(221, 221, 221, 0.8);
-  border-radius: 50%;
-  img {
-    display: block;
-    width: 100%;
-  }
-}
-
 // 查看更多
 .load_more {
   display: block;
@@ -231,5 +200,41 @@ body {
         // display: none;
       }
     }
+  }
+}
+
+// 返回顶部
+.to_top {
+  position: fixed;
+  bottom: 17px;
+  right: 20px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+  background-image: url('../images/top.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  transition: opacity .5s;
+  &.fade-in {
+    opacity: 1;
+  }
+}
+
+// 返回首页
+.go_back {
+  position: fixed;
+  bottom: 17px;
+  left: 20px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  background-image: url('../images/back.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  &.hidden {
+    display: none;
   }
 }
