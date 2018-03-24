@@ -32,7 +32,7 @@ class IndexPage extends Component {
     })
   }
   componentDidMount() {
-    const tab = this.props.match.params.id
+    const tab = this.props.match.params.id || 'all'
     this.getTopics(tab).then(rs => {
       this.setState({
         topicList: rs,

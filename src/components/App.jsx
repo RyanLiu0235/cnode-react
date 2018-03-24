@@ -13,6 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Route path="/" exact component={IndexPage} />
           <Route path="/tab/:id" component={IndexPage} />
           <Route path="/topic/:id" component={TopicDetail} />
         </div>
