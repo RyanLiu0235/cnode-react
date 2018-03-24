@@ -14,9 +14,9 @@ class TopicList extends Component {
           <div className="user_avatar">
             <img src={ item.author.avatar_url } alt={item.title} />
           </div>
-          <Link to={ topicLink } className="topic_title">
-            <h4>{ item.title }</h4>
-          </Link>
+          <h4 className="topic_title">
+            <Link to={ topicLink }>{ item.title }</Link>
+          </h4>
           <div className="reply_view">
             <span className="reply_number">{ item.reply_count }</span>
             <span className="seperate">/</span>

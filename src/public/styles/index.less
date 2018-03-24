@@ -1,3 +1,4 @@
+@import './reset.less';
 @import './markdown.less';
 
 body {
@@ -61,16 +62,16 @@ body {
       }
     }
     .topic_title {
-      display: block;
       flex: 1;
       height: 50px;
       line-height: 50px;
       margin-right: 5px;
-      color: #333;
       font-weight: normal;
       font-size: 14px;
       overflow: hidden;
-      h4 {
+      a {
+        display: block;
+        color: #333;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -232,4 +233,3 @@ body {
     }
   }
 }
-
