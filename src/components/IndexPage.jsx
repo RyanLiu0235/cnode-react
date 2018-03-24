@@ -10,55 +10,61 @@ class IndexPage extends Component {
     super(props)
     this.state = {
       topicList: [],
-      checkMore: false,
       nextPage: 1,
       tab: 'all'
     }
   }
-  componentDidMount() {
-    const nextPage = this.state.nextPage
-    const tab = this.props.match.params.id
+  getTopics(tab) {
+    const {
+      nextPage
+    } = this.state
 
-    superagent
-      .get(`https://cnodejs.org/api/v1/topics?page=${nextPage}&tab=${tab || this.state.tab}`)
-      .end(function(err, data) {
-        if (err) {
-          console.error(err)
-          return
-        }
-        const topicList = data.body.data
-        this.setState({
-          topicList,
-          checkMore: true,
-          nextPage: 2,
-          tab
+    return new Promise((resolve, reject) => {
+      superagent
+        .get(`https://cnodejs.org/api/v1/topics?page=${nextPage}&tab=${tab}`)
+        .end(function(err, data) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(data.body.data)
+          }
         })
-      }.bind(this))
+    })
+  }
+  componentDidMount() {
+    const tab = this.props.match.params.id
+    this.getTopics(tab).then(rs => {
+      this.setState({
+        topicList: rs,
+        nextPage: 2,
+        tab
+      })
+    })
   }
   componentWillReceiveProps(nextProps) {
     const tab = nextProps.match.params.id
-
-    superagent
-      .get('https://cnodejs.org/api/v1/topics?tab=' + tab + '&page=1')
-      .end(function(err, data) {
-        if (err) {
-          console.error(err)
-          return
-        }
-        const topicList = data.body.data
-        this.setState({
-          topicList,
-          tab,
-          nextPage: 2
-        })
-      }.bind(this))
+    this.getTopics(tab).then(rs => {
+      this.setState({
+        topicList: rs,
+        nextPage: 2,
+        tab
+      })
+    })
+  }
+  loadMore() {
+    this.getTopics(this.state.tab).then(rs => {
+      this.setState({
+        topicList: [...this.state.topicList, ...rs],
+        nextPage: this.state.nextPage + 1
+      })
+    })
   }
   render() {
     return (
       <div>
-				<NavBar />
-				<TopicList topicList={this.state.topicList} checkMore={this.checkMore} />
-			</div>
+        <NavBar />
+        <TopicList topicList={this.state.topicList} loadMore={this.loadMore.bind(this)} />
+      </div>
     )
   }
 }

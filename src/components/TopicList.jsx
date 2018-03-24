@@ -29,7 +29,7 @@ class TopicList extends Component {
       <div>
         <div className="topic_list">
           { topicList }
-          <span onClick={ this.props.checkMore } className="check_more">查看更多</span>
+          <span onClick={ this.props.loadMore } className="load_more">查看更多</span>
         </div>
       </div>
     )
