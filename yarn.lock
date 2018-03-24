@@ -2833,6 +2833,10 @@ form-data@~2.1.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
+format-publish-date@^0.0.3:
+  version "0.0.3"
+  resolved "http://registry.npm.taobao.org/format-publish-date/download/format-publish-date-0.0.3.tgz#b5730fe2e077e19be4ab9b1dc58e9926b5f65b67"
+
 formidable@^1.1.1:
   version "1.2.1"
   resolved "http://registry.npm.taobao.org/formidable/download/formidable-1.2.1.tgz#70fb7ca0290ee6ff961090415f4b3df3d2082659"
