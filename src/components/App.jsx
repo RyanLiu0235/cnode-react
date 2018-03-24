@@ -3,8 +3,7 @@ import React, {
 } from 'react'
 import {
   BrowserRouter as Router,
-  Route,
-  // Link
+  Route
 } from 'react-router-dom'
 import IndexPage from './IndexPage'
 import TopicDetail from './TopicDetail'
