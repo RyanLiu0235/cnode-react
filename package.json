@@ -97,5 +97,18 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stop2stare/cnode-react.git"
+  },
+  "keywords": [
+    "mvvm"
+  ],
+  "author": "liucheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stop2stare/cnode-react/issues"
+  },
+  "homepage": "https://github.com/stop2stare/cnode-react#readme"
 }
