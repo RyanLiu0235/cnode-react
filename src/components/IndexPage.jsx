@@ -3,6 +3,7 @@ import React, {
 } from 'react'
 import TopicList from './TopicList'
 import superagent from 'superagent'
+import NavBar from './NavBar'
 
 class IndexPage extends Component {
 	constructor(props) {
@@ -18,6 +19,7 @@ class IndexPage extends Component {
 	render() {
 		return (
 			<div>
+				<NavBar />
 				<TopicList topicList={this.state.topicList} checkMore={this.checkMore} />
 			</div>
 		)
