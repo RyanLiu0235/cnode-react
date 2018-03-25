@@ -13,11 +13,10 @@ class IndexPage extends Component {
       tab: 'all'
     }
   }
-  getTopics(tab) {
-    const {
-      nextPage
-    } = this.state
-
+  getTopics({
+    tab,
+    nextPage
+  }) {
     return new Promise((resolve, reject) => {
       superagent
         .get(`https://cnodejs.org/api/v1/topics?page=${nextPage}&tab=${tab}`)
@@ -32,7 +31,10 @@ class IndexPage extends Component {
   }
   componentDidMount() {
     const tab = this.props.match.params.id || 'all'
-    this.getTopics(tab).then(rs => {
+    this.getTopics({
+      tab,
+      nextPage: this.state.nextPage
+    }).then(rs => {
       this.setState({
         topicList: rs,
         nextPage: 2,
@@ -40,9 +42,16 @@ class IndexPage extends Component {
       })
     })
   }
-  componentWillReceiveProps(nextProps) {
-    const tab = nextProps.match.params.id
-    this.getTopics(tab).then(rs => {
+  componentWillReceiveProps({
+    match
+  }) {
+    const state = this.state
+    const tab = match.params.id
+    const nextPage = state.nextPage
+    this.getTopics({
+      tab,
+      nextPage: tab !== state.tab ? 1 : nextPage
+    }).then(rs => {
       this.setState({
         topicList: rs,
         nextPage: 2,
@@ -51,10 +60,11 @@ class IndexPage extends Component {
     })
   }
   loadMore() {
-    this.getTopics(this.state.tab).then(rs => {
+    const state = this.state
+    this.getTopics(state).then(rs => {
       this.setState({
-        topicList: [...this.state.topicList, ...rs],
-        nextPage: this.state.nextPage + 1
+        topicList: [...state.topicList, ...rs],
+        nextPage: state.nextPage + 1
       })
     })
   }
