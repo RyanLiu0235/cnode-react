@@ -13,6 +13,7 @@ import {
 import {
   fetchSelf
 } from '../actions'
+import {getCookie} from '../utils'
 
 const list = [{
   name: 'all',
@@ -33,16 +34,10 @@ const list = [{
 
 class NavBar extends Component {
   componentDidMount() {
-    const cnode = document.cookie.split('; ').map(item => {
-      const cookie = item.split('=')
-      return {
-        name: cookie[0],
-        value: cookie[1]
-      }
-    }).find(cookie => cookie.name === 'cnode')
+    const cnode = getCookie(document.cookie, 'cnode')
 
     if (cnode) {
-      this.props.fetchSelf(cnode.value)
+      this.props.fetchSelf(cnode)
     }
   }
   goBack() {

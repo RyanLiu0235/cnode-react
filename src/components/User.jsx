@@ -12,7 +12,8 @@ import {
 } from 'redux'
 import {
   fetchUser,
-  fetchSelf
+  fetchSelf,
+  logout
 } from '../actions'
 import formatter from 'format-publish-date'
 
@@ -44,7 +45,11 @@ class NavBar extends Component {
   componentWillReceiveProps(nextProps) {
     this.getInfo(nextProps)
   }
-  handleLogout() {}
+  handleLogout() {
+    this.props.logout().then(rs => {
+      this.props.history.push('/')
+    })
+  }
   render() {
     const user = this.state.isSelf ? this.props.self : this.props.user
     const {
@@ -83,8 +88,8 @@ class NavBar extends Component {
     })
     const signout =
       <div className="button_container">
-        <div className="button button_warning" onClick={this.handleLogout}>登出</div>
-        <Link to={ '/user/' + user.loginname + '/notifications'} className="button button_primary">查看消息</Link>
+        <div className="button button_warning" onClick={this.handleLogout.bind(this)}>登出</div>
+        <Link to={ '/user/' + user.loginname + '/notifications' } className="button button_primary">查看消息</Link>
       </div>
     return (
       <div className="user_page">
@@ -144,7 +149,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchUser,
-    fetchSelf
+    fetchSelf,
+    logout
   }, dispatch)
 }
 

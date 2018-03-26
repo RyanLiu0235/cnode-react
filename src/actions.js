@@ -1,3 +1,6 @@
+import {
+  delCookie
+} from './utils'
 const domain = 'https://cnodejs.org/api/v1/'
 
 export const FETCH_USER = 'FETCH_USER'
@@ -37,21 +40,31 @@ export const fetchSelf = name => dispatch => {
 export const login = accesstoken => dispatch => {
   return fetch(`${domain}accesstoken`, {
     method: 'POST',
-    body: {
+    body: JSON.stringify({
       accesstoken
-    }
+    }),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
   }).then(res => {
     if (res.ok) {
-      res.json().then(({
-        success,
-        loginname
-      }) => {
-        if (success) {
-          return Promise.resolve(loginname)
-        } else {
-          return Promise.reject()
-        }
-      })
+      return res.json()
+    } else {
+      return Promise.reject(`${res.status}: ${res.statusText}`)
     }
+  })
+}
+
+export const LOG_OUT = 'LOG_OUT'
+export const logout = () => dispatch => {
+  return new Promise(resolve => {
+    // 清除本地数据
+    dispatch({
+      type: LOG_OUT
+    })
+    // 清除cookie
+    const cookie = delCookie(document.cookie, 'cnode')
+    document.cookie = cookie
+    resolve()
   })
 }

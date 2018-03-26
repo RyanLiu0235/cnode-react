@@ -30,11 +30,13 @@ class SignIn extends Component {
       landState: '登录中...'
     }
 
-    this.props.login(this.state.accesstoken).then(loginname => {
+    this.props.login(this.state.accesstoken).then(({ loginname }) => {
       this.props.history.push('/')
       this.props.fetchSelf(loginname)
       // 种cookie，设置过期时间为12个小时之后
-      document.cookie += `cnode=${loginname}; expires=${new Date(Date.now() + 3600 * 12)}`
+      document.cookie = `cnode=${loginname}; expires=${new Date(Date.now() + 3600 * 12)}`
+    }, err => {
+      console.error(err)
     })
   }
   render() {

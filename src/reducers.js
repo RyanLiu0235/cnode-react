@@ -1,6 +1,7 @@
 import {
   FETCH_USER,
-  FETCH_SELF
+  FETCH_SELF,
+  LOG_OUT
 } from './actions';
 import {
   combineReducers
@@ -13,6 +14,11 @@ function self(state = {
   switch (action.type) {
     case FETCH_SELF:
       return action.data
+    case LOG_OUT:
+      return {
+        recent_topics: [],
+        recent_replies: []
+      }
     default:
       return state
   }
