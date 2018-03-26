@@ -25,11 +25,10 @@ class NavBar extends Component {
       isSelf: false
     }
   }
-  componentDidMount() {
-    const {
-      match,
-      self
-    } = this.props
+  getInfo({
+    match,
+    self
+  }) {
     const name = match.params.name
     if (name === self.loginname) {
       this.setState({
@@ -38,6 +37,12 @@ class NavBar extends Component {
     } else {
       this.props.fetchUser(name)
     }
+  }
+  componentWillMount() {
+    this.getInfo(this.props)
+  }
+  componentWillReceiveProps(nextProps) {
+    this.getInfo(nextProps)
   }
   handleLogout() {}
   render() {
@@ -49,9 +54,9 @@ class NavBar extends Component {
     const topics = recent_topics.map(topic => {
       return (
         <div key={topic.id} className="topic_item">
-          <div className="user_avatar">
+          <Link to={'/user/' + topic.author.loginname} className="user_avatar">
             <img src={topic.author.avatar_url} alt={topic.author.loginname} /> 
-          </div> 
+          </Link>
           <h4 className="topic_title">
             <Link to={ '/topic/' + topic.id }>
               { topic.title }
@@ -64,9 +69,9 @@ class NavBar extends Component {
     const replies = recent_replies.map(reply => {
       return (
         <div key={reply.id} className="topic_item">
-          <div className="user_avatar">
+          <Link to={'/user/' + reply.author.loginname} className="user_avatar">
             <img src={reply.author.avatar_url} alt={reply.author.loginname} /> 
-          </div> 
+          </Link>
           <h4 className="topic_title">
             <Link to={ '/topic/' + reply.id }>
               { reply.title }
@@ -98,7 +103,7 @@ class NavBar extends Component {
             <div className="user_score panel_row">积分：{ user.score }</div>
             {
               this.state.isSelf && 
-              <div v-if="isSelf" className="user_notification panel_row">
+              <div className="user_notification panel_row">
                 未读消息：{/*{ unread }*/}
               </div>
             }
@@ -109,7 +114,7 @@ class NavBar extends Component {
           {
             recent_topics.length === 0 ? 
             <p className="panel_empty">最近没有参与话题</p> : 
-            <div className="recent_topic_list" v-if="user.recent_topics.length > 0">
+            <div className="recent_topic_list">
               {topics}
             </div>
           }
