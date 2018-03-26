@@ -7,6 +7,12 @@ import {
 import {
   connect
 } from 'react-redux'
+import {
+  bindActionCreators
+} from 'redux'
+import {
+  fetchSelf
+} from '../actions'
 
 const list = [{
   name: 'all',
@@ -26,6 +32,19 @@ const list = [{
 }]
 
 class NavBar extends Component {
+  componentDidMount() {
+    const cnode = document.cookie.split('; ').map(item => {
+      const cookie = item.split('=')
+      return {
+        name: cookie[0],
+        value: cookie[1]
+      }
+    }).find(cookie => cookie.name === 'cnode')
+
+    if (cnode) {
+      this.props.fetchSelf(cnode.value)
+    }
+  }
   goBack() {
     window.history.back()
   }
@@ -33,17 +52,12 @@ class NavBar extends Component {
     const user = this.props.self
     const navList = list.map(item => {
       return (
-        <NavLink activeClassName="cur" className="tab_item" to={"/tab/" + item.name} key={item.name}>
+        <NavLink className="tab_item" to={"/tab/" + item.name} key={item.name}>
           {item.text}
         </NavLink>
       )
     })
-    const loginBox = <NavLink className="tab_item" to="/signin">登录</NavLink>
-    const userBox =
-      <NavLink className=" user_name" to={ '/user/' + user.loginname }>
-        <img src={ user.avatar_url } alt={ user.loginname } />
-        {/*<i v-if="unread > 0" className="unread_num">{ unread }</i>*/}
-      </NavLink>
+
     return (
       <div className="panel">
         <div className="header_container">
@@ -52,7 +66,14 @@ class NavBar extends Component {
             {navList}
           </div>
           <div className="login">
-            { user.loginname ? userBox : loginBox}
+          {
+            user.loginname ?
+            <NavLink className=" user_name" to={ '/user/' + user.loginname }>
+              <img src={ user.avatar_url } alt={ user.loginname } />
+              {/*<i v-if="unread > 0" className="unread_num">{ unread }</i>*/}
+            </NavLink> :
+            <NavLink className="tab_item" to="/signin">登录</NavLink>
+          }
           </div>
         </div>
       </div>
@@ -66,4 +87,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(NavBar)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    fetchSelf
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
