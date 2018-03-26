@@ -2,7 +2,6 @@ import React, {
   Component
 } from 'react'
 import TopicList from './TopicList'
-import superagent from 'superagent'
 
 class IndexPage extends Component {
   constructor(props) {
@@ -17,26 +16,26 @@ class IndexPage extends Component {
     tab,
     nextPage
   }) {
-    return new Promise((resolve, reject) => {
-      superagent
-        .get(`https://cnodejs.org/api/v1/topics?page=${nextPage}&tab=${tab}`)
-        .end(function(err, data) {
-          if (err) {
-            reject(err)
-          } else {
-            resolve(data.body.data)
-          }
-        })
-    })
+    return fetch(`https://cnodejs.org/api/v1/topics?page=${nextPage}&tab=${tab}`)
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          return Promise.reject()
+        }
+      })
   }
   componentDidMount() {
     const tab = this.props.match.params.id || 'all'
     this.getTopics({
       tab,
       nextPage: this.state.nextPage
-    }).then(rs => {
+    }).then(({
+      data,
+      success
+    }) => {
       this.setState({
-        topicList: rs,
+        topicList: data,
         nextPage: 2,
         tab
       })
@@ -51,9 +50,12 @@ class IndexPage extends Component {
     this.getTopics({
       tab,
       nextPage: tab !== state.tab ? 1 : nextPage
-    }).then(rs => {
+    }).then(({
+      data,
+      success
+    }) => {
       this.setState({
-        topicList: rs,
+        topicList: data,
         nextPage: 2,
         tab
       })
@@ -61,9 +63,12 @@ class IndexPage extends Component {
   }
   loadMore() {
     const state = this.state
-    this.getTopics(state).then(rs => {
+    this.getTopics(state).then(({
+      data,
+      success
+    }) => {
       this.setState({
-        topicList: [...state.topicList, ...rs],
+        topicList: [...state.topicList, ...data],
         nextPage: state.nextPage + 1
       })
     })

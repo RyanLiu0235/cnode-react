@@ -4,7 +4,6 @@ import React, {
 import {
   Link
 } from 'react-router-dom'
-import superagent from 'superagent'
 import formatter from 'format-publish-date'
 
 const format = raw => formatter(new Date(raw))
@@ -27,17 +26,18 @@ class TopicDetail extends Component {
   componentDidMount() {
     const id = this.props.match.params.id
 
-    superagent
-      .get(`https://cnodejs.org/api/v1/topic/${id}`)
-      .end(function(err, data) {
-        if (err) {
-          console.error(err)
-          return
+    fetch(`https://cnodejs.org/api/v1/topic/${id}`)
+      .then(res => {
+        if (res.ok) {
+          res.json().then(({
+            data
+          }) => {
+            this.setState({
+              detail: data
+            })
+          })
         }
-        this.setState({
-          detail: data.body.data
-        })
-      }.bind(this))
+      })
   }
   render() {
     const {
