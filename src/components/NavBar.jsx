@@ -4,6 +4,10 @@ import React, {
 import {
   NavLink
 } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {fetchUser} from '../actions'
+
 const list = [{
   name: 'all',
   text: '全部'
@@ -26,6 +30,7 @@ class NavBar extends Component {
     window.history.back()
   }
   render() {
+    const user = this.props.user
     const navList = list.map(item => {
       return (
         <NavLink activeClassName="cur" className="tab_item" to={"/tab/" + item.name} key={item.name}>
@@ -34,6 +39,10 @@ class NavBar extends Component {
       )
     })
     const loginBox = <NavLink className="tab_item" to="/signin">登录</NavLink>
+    const userBox = <NavLink className=" user_name" to={ '/user/' + user.loginname }>
+          <img src={ user.avatar_url } alt={ user.loginname } />
+          {/*<i v-if="unread > 0" className="unread_num">{ unread }</i>*/}
+        </NavLink>
     return (
       <div className="panel">
         <div className="header_container">
@@ -42,12 +51,7 @@ class NavBar extends Component {
             {navList}
           </div>
           <div className="login">
-            {loginBox}
-            {/*<a v-if="!loginname" className="tab_item" v-link="{ path: '/signin' }">登录</a>
-            <a v-if="loginname" className=" user_name" v-link="{ path: '/user/' + loginname }">
-              <img :src="avatar_url" alt={} />
-              <i v-if="unread > 0" className="unread_num">{{ unread }}</i>
-            </a>*/}
+            { user.loginname ? userBox : loginBox}
           </div>
         </div>
       </div>
@@ -55,4 +59,14 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchUser }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
