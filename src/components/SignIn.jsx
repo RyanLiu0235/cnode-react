@@ -9,7 +9,7 @@ import {
 } from 'redux'
 import {
   login,
-  fetchUser
+  fetchSelf
 } from '../actions'
 
 class SignIn extends Component {
@@ -32,7 +32,7 @@ class SignIn extends Component {
 
     this.props.login(this.state.accesstoken).then(loginname => {
       this.props.history.push('/')
-      this.props.fetchUser(loginname)
+      this.props.fetchSelf(loginname)
     })
   }
   render() {
@@ -59,7 +59,7 @@ class SignIn extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     login,
-    fetchUser
+    fetchSelf
   }, dispatch)
 }
 

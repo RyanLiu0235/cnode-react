@@ -1,11 +1,27 @@
 import {
-  FETCH_USER
+  FETCH_USER,
+  FETCH_SELF
 } from './actions';
 import {
   combineReducers
 } from 'redux';
 
-function user(state = {}, action) {
+function self(state = {
+  recent_topics: [],
+  recent_replies: []
+}, action) {
+  switch (action.type) {
+    case FETCH_SELF:
+      return action.data
+    default:
+      return state
+  }
+}
+
+function user(state = {
+  recent_topics: [],
+  recent_replies: []
+}, action) {
   switch (action.type) {
     case FETCH_USER:
       return action.data
@@ -15,7 +31,8 @@ function user(state = {}, action) {
 }
 
 const reducers = combineReducers({
-  user
+  user,
+  self
 })
 
 export default reducers

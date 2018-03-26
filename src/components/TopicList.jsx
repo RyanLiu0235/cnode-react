@@ -11,9 +11,9 @@ class TopicList extends Component {
       const topicLink = '/topic/' + item.id;
       return (
         <div className="topic_item" key={ item.id }>
-          <div className="user_avatar">
-            <img src={ item.author.avatar_url } alt={item.title} />
-          </div>
+          <Link to={ '/user/' + item.author.loginname } className="user_avatar">
+            <img src={ item.author.avatar_url } alt={ item.title } />
+          </Link>
           <h4 className="topic_title">
             <Link to={ topicLink }>{ item.title }</Link>
           </h4>
