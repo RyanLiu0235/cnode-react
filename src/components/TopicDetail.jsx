@@ -1,6 +1,9 @@
 import React, {
   Component
 } from 'react'
+import {
+  Link
+} from 'react-router-dom'
 import superagent from 'superagent'
 import formatter from 'format-publish-date'
 
@@ -51,16 +54,14 @@ class TopicDetail extends Component {
       return (
         <div className="comment_item" key={item.id}>
           <div className="user_info">
-            <div className="user_avatar">
+            <Link to={ '/user/' + item.author.loginname } className="user_avatar">
               <img src={item.author.avatar_url} alt={item.author.loginname} />
-            </div>
-            <div className="user_name">{item.author.loginname}</div>
-            <div className="time_stamp">{format(item.create_at)}</div>
-            <div className="floor">{index + 1}楼</div>
+            </Link>
+            <span className="user_name">{item.author.loginname}</span>
+            <span className="time_stamp">{format(item.create_at)}</span>
+            <span className="floor">{index + 1}楼</span>
           </div>
-          <div className="comment_content">
-            <div dangerouslySetInnerHTML={{__html: item.content}} />
-          </div>
+          <div className="comment_content" dangerouslySetInnerHTML={{__html: item.content}} />
         </div>
       )
     })
@@ -70,13 +71,11 @@ class TopicDetail extends Component {
           <h2 className="topic_title">{title}</h2>
           <div className="topic_info">
             <span>{author.loginname}</span>
-            <span>{format(create_at)}</span>
             <span>{reply_count} / {visit_count}</span>
+            <span>发表于：{format(create_at)}</span>
           </div>
         </div>
-        <div ref="topicBody" className="topic_body">
-          <div dangerouslySetInnerHTML={{__html: content}} />
-        </div>
+        <div className="topic_body" dangerouslySetInnerHTML={{__html: content}} />
         <div className="topic_comment">
           <div className="comment_header">{!!commentList ? '评论列表' : '暂无评论'}</div>
           <div className="comment_list">{ReplyList}</div>

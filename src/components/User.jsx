@@ -52,9 +52,11 @@ class NavBar extends Component {
           <div className="user_avatar">
             <img src={topic.author.avatar_url} alt={topic.author.loginname} /> 
           </div> 
-          <Link to={ '/topic/' + topic.id } className="topic_title">
-            <h4>{ topic.title }</h4> 
-          </Link> 
+          <h4 className="topic_title">
+            <Link to={ '/topic/' + topic.id }>
+              { topic.title }
+            </Link>
+          </h4>
           <div className="reply_view">{ format(topic.last_reply_at) }</div> 
         </div>
       )
@@ -65,9 +67,11 @@ class NavBar extends Component {
           <div className="user_avatar">
             <img src={reply.author.avatar_url} alt={reply.author.loginname} /> 
           </div> 
-          <Link to={ '/topic/' + reply.id } className="topic_title">
-            <h4>{ reply.title }</h4> 
-          </Link> 
+          <h4 className="topic_title">
+            <Link to={ '/topic/' + reply.id }>
+              { reply.title }
+            </Link>
+          </h4>
           <div className="reply_view">{ format(reply.last_reply_at) }</div> 
         </div>
       )
@@ -78,7 +82,7 @@ class NavBar extends Component {
         <Link to={ '/user/' + user.loginname + '/notifications'} className="button button_primary">查看消息</Link>
       </div>
     return (
-      <div>
+      <div className="user_page">
         <div className="user_info panel">
           <div className="panel_title">个人简介</div>
           <div className="panel_container">
