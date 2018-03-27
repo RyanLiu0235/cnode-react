@@ -4,40 +4,26 @@ import React, {
 import {
   Link
 } from 'react-router-dom'
+import {
+  connect
+} from 'react-redux'
+import {
+  bindActionCreators
+} from 'redux'
+import {
+  fetchTopicDetail
+} from '../actions'
 import formatter from 'format-publish-date'
 
 const format = raw => formatter(new Date(raw))
 
 class TopicDetail extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      detail: {
-        replies: [],
-        title: '',
-        author: '',
-        create_at: 0,
-        reply_count: 0,
-        visit_count: 0,
-        content: ''
-      }
-    }
-  }
   componentWillMount() {
     const id = this.props.match.params.id
 
-    fetch(`https://cnodejs.org/api/v1/topic/${id}`)
-      .then(res => {
-        if (res.ok) {
-          res.json().then(({
-            data
-          }) => {
-            this.setState({
-              detail: data
-            })
-          })
-        }
-      })
+    this.props.fetchTopicDetail({
+      id
+    })
   }
   render() {
     const {
@@ -48,7 +34,7 @@ class TopicDetail extends Component {
       reply_count,
       visit_count,
       content
-    } = this.state.detail
+    } = this.props.topic
     const commentList = replies.length;
     const ReplyList = replies.map((item, index) => {
       return (
@@ -85,4 +71,16 @@ class TopicDetail extends Component {
   }
 }
 
-export default TopicDetail
+function mapStateToProps(state) {
+  return {
+    topic: state.topic
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    fetchTopicDetail
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopicDetail)

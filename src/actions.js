@@ -49,6 +49,22 @@ export const fetchMoreTopics = ({
   _fetchTopics(page, tab, FETCH_MORE_TOPICS, dispatch)
 }
 
+export const FETCH_TOPIC_DETAIL = 'FETCH_TOPIC_DETAIL'
+export const fetchTopicDetail = ({
+  id
+}) => dispatch => {
+  fetch(`${domain}topic/${id}`)
+    .then(handleResponse)
+    .then(({
+      data
+    }) => {
+      dispatch({
+        type: FETCH_TOPIC_DETAIL,
+        data
+      })
+    })
+}
+
 export const FETCH_USER = 'FETCH_USER'
 export const fetchUser = name => dispatch => {
   fetch(`${domain}user/${name}`)
