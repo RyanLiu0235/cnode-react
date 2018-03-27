@@ -13,7 +13,9 @@ import {
 import {
   fetchSelf
 } from '../actions'
-import {getCookie} from '../utils'
+import {
+  getCookie
+} from '../utils'
 
 const list = [{
   name: 'all',

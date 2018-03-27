@@ -65,32 +65,27 @@ export const fetchTopicDetail = ({
     })
 }
 
-export const FETCH_USER = 'FETCH_USER'
-export const fetchUser = name => dispatch => {
+const _fetchUser = (name, dispatch, mutation) => {
   fetch(`${domain}user/${name}`)
     .then(handleResponse)
     .then(({
       data
     }) => {
       dispatch({
-        type: FETCH_USER,
+        type: mutation,
         data
       })
     }).catch(handleError)
 }
 
+export const FETCH_USER = 'FETCH_USER'
+export const fetchUser = name => dispatch => {
+  _fetchUser(name, dispatch, FETCH_USER)
+}
+
 export const FETCH_SELF = 'FETCH_SELF'
 export const fetchSelf = name => dispatch => {
-  fetch(`${domain}user/${name}`)
-    .then(handleResponse)
-    .then(({
-      data
-    }) => {
-      dispatch({
-        type: FETCH_SELF,
-        data
-      })
-    }).catch(handleError)
+  _fetchUser(name, dispatch, FETCH_SELF)
 }
 
 export const login = accesstoken => dispatch => {
