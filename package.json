@@ -10,7 +10,8 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "zoomme": "0.0.3"
   },
   "devDependencies": {
     "autoprefixer": "7.1.6",

@@ -54,14 +54,13 @@ class IndexPage extends Component {
   }
   render() {
     const topicList = this.props.topics.list.map(item => {
-      const topicLink = '/topic/' + item.id;
       return (
         <div className="topic_item" key={ item.id }>
           <Link to={ '/user/' + item.author.loginname } className="user_avatar">
             <img src={ item.author.avatar_url } alt={ item.title } />
           </Link>
           <h4 className="topic_title">
-            <Link to={ topicLink }>{ item.title }</Link>
+            <Link to={ '/topic/' + item.id }>{ item.title }</Link>
           </h4>
           <div className="reply_view">
             <span className="reply_number">{ item.reply_count }</span>

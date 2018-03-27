@@ -14,6 +14,7 @@ import {
   fetchTopicDetail
 } from '../actions'
 import formatter from 'format-publish-date'
+import Zoomme from 'zoomme'
 
 const format = raw => formatter(new Date(raw))
 
@@ -23,6 +24,12 @@ class TopicDetail extends Component {
 
     this.props.fetchTopicDetail({
       id
+    })
+  }
+  componentDidMount() {
+    const container = document.querySelector('.topic_body')
+    new Zoomme({
+      container
     })
   }
   render() {
