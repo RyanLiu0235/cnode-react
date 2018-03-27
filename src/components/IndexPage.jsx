@@ -11,7 +11,8 @@ import {
   bindActionCreators
 } from 'redux'
 import {
-  fetchTopics
+  fetchTopics,
+  fetchMoreTopics
 } from '../actions'
 
 class IndexPage extends Component {
@@ -28,12 +29,11 @@ class IndexPage extends Component {
       page: topics.page
     })
   }
-  componentWillReceiveProps(nextProps) {
-    const {
-      topics,
-      fetchTopics,
-      match
-    } = nextProps
+  componentWillReceiveProps({
+    topics,
+    fetchTopics,
+    match
+  }) {
     const tab = topics.tab
     const newTab = match.params.id
 
@@ -47,17 +47,10 @@ class IndexPage extends Component {
   loadMore() {
     const {
       topics,
-      fetchTopics
+      fetchMoreTopics
     } = this.props
-    const {
-      tab,
-      page
-    } = topics
 
-    fetchTopics({
-      tab,
-      page: page + 1
-    })
+    fetchMoreTopics(topics)
   }
   render() {
     const topicList = this.props.topics.list.map(item => {
@@ -81,7 +74,7 @@ class IndexPage extends Component {
     return (
       <div className="topic_list">
         { topicList }
-        <span onClick={ this.props.loadMore } className="load_more">查看更多</span>
+        <span onClick={ this.loadMore.bind(this) } className="load_more">查看更多</span>
       </div>
     )
   }
@@ -95,7 +88,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchTopics
+    fetchTopics,
+    fetchMoreTopics
   }, dispatch)
 }
 

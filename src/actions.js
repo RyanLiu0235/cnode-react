@@ -16,18 +16,14 @@ const handleError = err => {
   console.error(err)
 }
 
-export const FETCH_TOPICS = 'FETCH_TOPICS'
-export const fetchTopics = ({
-  tab,
-  page
-}) => dispatch => {
+const _fetchTopics = (page, tab, mutation, dispatch) => {
   fetch(`${domain}topics?page=${page}&tab=${tab}`)
     .then(handleResponse)
     .then(({
       data
     }) => {
       dispatch({
-        type: FETCH_TOPICS,
+        type: mutation,
         data: {
           list: data,
           page: page + 1,
@@ -35,6 +31,22 @@ export const fetchTopics = ({
         }
       })
     }).catch(handleError)
+}
+
+export const FETCH_TOPICS = 'FETCH_TOPICS'
+export const fetchTopics = ({
+  tab,
+  page
+}) => dispatch => {
+  _fetchTopics(page, tab, FETCH_TOPICS, dispatch)
+}
+
+export const FETCH_MORE_TOPICS = 'FETCH_MORE_TOPICS'
+export const fetchMoreTopics = ({
+  tab,
+  page
+}) => dispatch => {
+  _fetchTopics(page, tab, FETCH_MORE_TOPICS, dispatch)
 }
 
 export const FETCH_USER = 'FETCH_USER'

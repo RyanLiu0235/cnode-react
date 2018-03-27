@@ -1,5 +1,6 @@
 import {
   FETCH_TOPICS,
+  FETCH_MORE_TOPICS,
   FETCH_USER,
   FETCH_SELF,
   LOG_OUT
@@ -16,6 +17,17 @@ function topics(state = {
   switch (action.type) {
     case FETCH_TOPICS:
       return action.data
+    case FETCH_MORE_TOPICS:
+      const {
+        page,
+        tab,
+        list
+      } = action.data
+      return {
+        page,
+        tab,
+        list: [...state.list, ...list]
+      }
     default:
       return state
   }
