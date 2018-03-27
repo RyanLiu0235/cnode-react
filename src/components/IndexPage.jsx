@@ -16,7 +16,7 @@ import {
 } from '../actions'
 
 class IndexPage extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const {
       match,
       topics,

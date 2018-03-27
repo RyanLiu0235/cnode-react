@@ -23,7 +23,7 @@ class TopicDetail extends Component {
       }
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     const id = this.props.match.params.id
 
     fetch(`https://cnodejs.org/api/v1/topic/${id}`)

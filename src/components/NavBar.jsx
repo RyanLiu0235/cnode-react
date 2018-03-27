@@ -33,7 +33,7 @@ const list = [{
 }]
 
 class NavBar extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const cnode = getCookie(document.cookie, 'cnode')
 
     if (cnode) {
