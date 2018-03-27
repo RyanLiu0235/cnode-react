@@ -35,7 +35,7 @@ class IndexPage extends Component {
     match
   }) {
     const tab = topics.tab
-    const newTab = match.params.id
+    const newTab = match.params.id || 'all'
 
     if (newTab !== tab) {
       fetchTopics({
