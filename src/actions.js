@@ -3,38 +3,66 @@ import {
 } from './utils'
 const domain = 'https://cnodejs.org/api/v1/'
 
+// middlewares for handling responses
+const handleResponse = res => {
+  if (res.ok) {
+    return res.json()
+  } else {
+    return Promise.reject(res.statusText)
+  }
+}
+
+const handleError = err => {
+  console.error(err)
+}
+
+export const FETCH_TOPICS = 'FETCH_TOPICS'
+export const fetchTopics = ({
+  tab,
+  page
+}) => dispatch => {
+  fetch(`${domain}topics?page=${page}&tab=${tab}`)
+    .then(handleResponse)
+    .then(({
+      data
+    }) => {
+      dispatch({
+        type: FETCH_TOPICS,
+        data: {
+          list: data,
+          page: page + 1,
+          tab
+        }
+      })
+    }).catch(handleError)
+}
+
 export const FETCH_USER = 'FETCH_USER'
 export const fetchUser = name => dispatch => {
   fetch(`${domain}user/${name}`)
-    .then(res => {
-      if (res.ok) {
-        res.json().then(({
-          data
-        }) => {
-          dispatch({
-            type: FETCH_USER,
-            data
-          })
-        })
-      }
-    })
+    .then(handleResponse)
+    .then(({
+      data
+    }) => {
+      dispatch({
+        type: FETCH_USER,
+        data
+      })
+    }).catch(handleError)
 }
 
 export const FETCH_SELF = 'FETCH_SELF'
 export const fetchSelf = name => dispatch => {
   fetch(`${domain}user/${name}`)
-    .then(res => {
-      if (res.ok) {
-        res.json().then(({
-          data
-        }) => {
-          dispatch({
-            type: FETCH_SELF,
-            data
-          })
-        })
-      }
-    })
+    .then(handleResponse)
+    .then(({
+      data
+    }) => {
+      dispatch({
+        type: FETCH_SELF,
+        data
+      })
+    }).catch(handleError)
 }
 
 export const login = accesstoken => dispatch => {
@@ -46,14 +74,9 @@ export const login = accesstoken => dispatch => {
     headers: new Headers({
       'Content-Type': 'application/json'
     })
-  }).then(res => {
-    if (res.ok) {
-      return res.json()
-    } else {
-      return Promise.reject(`${res.status}: ${res.statusText}`)
-    }
-  })
+  }).then(handleResponse)
 }
+
 
 export const LOG_OUT = 'LOG_OUT'
 export const logout = () => dispatch => {

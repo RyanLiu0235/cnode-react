@@ -1,11 +1,25 @@
 import {
+  FETCH_TOPICS,
   FETCH_USER,
   FETCH_SELF,
   LOG_OUT
-} from './actions';
+} from './actions'
 import {
   combineReducers
-} from 'redux';
+} from 'redux'
+
+function topics(state = {
+  page: 1,
+  tab: 'all',
+  list: []
+}, action) {
+  switch (action.type) {
+    case FETCH_TOPICS:
+      return action.data
+    default:
+      return state
+  }
+}
 
 function self(state = {
   recent_topics: [],
@@ -37,6 +51,7 @@ function user(state = {
 }
 
 const reducers = combineReducers({
+  topics,
   user,
   self
 })

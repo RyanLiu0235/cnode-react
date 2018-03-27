@@ -1,83 +1,102 @@
 import React, {
   Component
 } from 'react'
-import TopicList from './TopicList'
+import {
+  connect
+} from 'react-redux'
+import {
+  Link
+} from 'react-router-dom'
+import {
+  bindActionCreators
+} from 'redux'
+import {
+  fetchTopics
+} from '../actions'
 
 class IndexPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      topicList: [],
-      nextPage: 1,
-      tab: 'all'
+  componentDidMount() {
+    const {
+      match,
+      topics,
+      fetchTopics
+    } = this.props
+    const tab = match.params.id || 'all'
+
+    fetchTopics({
+      tab,
+      page: topics.page
+    })
+  }
+  componentWillReceiveProps(nextProps) {
+    const {
+      topics,
+      fetchTopics,
+      match
+    } = nextProps
+    const tab = topics.tab
+    const newTab = match.params.id
+
+    if (newTab !== tab) {
+      fetchTopics({
+        tab: newTab,
+        page: 1
+      })
     }
   }
-  getTopics({
-    tab,
-    nextPage
-  }) {
-    return fetch(`https://cnodejs.org/api/v1/topics?page=${nextPage}&tab=${tab}`)
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        } else {
-          return Promise.reject()
-        }
-      })
-  }
-  componentDidMount() {
-    const tab = this.props.match.params.id || 'all'
-    this.getTopics({
-      tab,
-      nextPage: this.state.nextPage
-    }).then(({
-      data,
-      success
-    }) => {
-      this.setState({
-        topicList: data,
-        nextPage: 2,
-        tab
-      })
-    })
-  }
-  componentWillReceiveProps({
-    match
-  }) {
-    const state = this.state
-    const tab = match.params.id
-    const nextPage = state.nextPage
-    this.getTopics({
-      tab,
-      nextPage: tab !== state.tab ? 1 : nextPage
-    }).then(({
-      data,
-      success
-    }) => {
-      this.setState({
-        topicList: data,
-        nextPage: 2,
-        tab
-      })
-    })
-  }
   loadMore() {
-    const state = this.state
-    this.getTopics(state).then(({
-      data,
-      success
-    }) => {
-      this.setState({
-        topicList: [...state.topicList, ...data],
-        nextPage: state.nextPage + 1
-      })
+    const {
+      topics,
+      fetchTopics
+    } = this.props
+    const {
+      tab,
+      page
+    } = topics
+
+    fetchTopics({
+      tab,
+      page: page + 1
     })
   }
   render() {
+    const topicList = this.props.topics.list.map(item => {
+      const topicLink = '/topic/' + item.id;
+      return (
+        <div className="topic_item" key={ item.id }>
+          <Link to={ '/user/' + item.author.loginname } className="user_avatar">
+            <img src={ item.author.avatar_url } alt={ item.title } />
+          </Link>
+          <h4 className="topic_title">
+            <Link to={ topicLink }>{ item.title }</Link>
+          </h4>
+          <div className="reply_view">
+            <span className="reply_number">{ item.reply_count }</span>
+            <span className="seperate">/</span>
+            <span className="view_number">{ item.visit_count}</span>
+          </div>
+        </div>
+      )
+    })
     return (
-      <TopicList topicList={this.state.topicList} loadMore={this.loadMore.bind(this)} />
+      <div className="topic_list">
+        { topicList }
+        <span onClick={ this.props.loadMore } className="load_more">查看更多</span>
+      </div>
     )
   }
 }
 
-export default IndexPage
+function mapStateToProps(state) {
+  return {
+    topics: state.topics
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    fetchTopics
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IndexPage)
