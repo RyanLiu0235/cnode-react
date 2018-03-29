@@ -12,7 +12,8 @@ import {
 } from 'redux'
 import {
   fetchTopics,
-  fetchMoreTopics
+  fetchMoreTopics,
+  resetPage
 } from '../actions'
 
 class IndexPage extends Component {
@@ -43,6 +44,11 @@ class IndexPage extends Component {
         page: 1
       })
     }
+  }
+
+  // when leaving this page, reset page data
+  componentWillUnmount() {
+    this.props.resetPage()
   }
   loadMore() {
     const {
@@ -88,7 +94,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchTopics,
-    fetchMoreTopics
+    fetchMoreTopics,
+    resetPage
   }, dispatch)
 }
 

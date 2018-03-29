@@ -49,6 +49,13 @@ export const fetchMoreTopics = ({
   _fetchTopics(page, tab, FETCH_MORE_TOPICS, dispatch)
 }
 
+export const RESET_PAGE = 'RESET_PAGE'
+export const resetPage = () => dispatch => {
+  dispatch({
+    type: RESET_PAGE
+  })
+}
+
 export const FETCH_TOPIC_DETAIL = 'FETCH_TOPIC_DETAIL'
 export const fetchTopicDetail = ({
   id

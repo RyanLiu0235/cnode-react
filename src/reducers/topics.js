@@ -1,6 +1,7 @@
 import {
   FETCH_TOPICS,
-  FETCH_MORE_TOPICS
+  FETCH_MORE_TOPICS,
+  RESET_PAGE
 } from '../actions'
 
 let _state = {
@@ -23,6 +24,8 @@ export default function topics(state = _state, action) {
         tab,
         list: [...state.list, ...list]
       }
+    case RESET_PAGE:
+      return _state
     default:
       return state
   }
