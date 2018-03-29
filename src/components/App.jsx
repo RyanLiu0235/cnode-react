@@ -11,6 +11,7 @@ import SignIn from './SignIn'
 import User from './User'
 import ToTop from './ToTop'
 import NavBar from './NavBar'
+import Footer from './Footer'
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route path="/signin" component={SignIn} />
           <Route path="/user/:name" component={User} />
           <ToTop />
+          <Footer />
         </div>
       </Router>
     )
