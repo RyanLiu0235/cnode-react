@@ -1,6 +1,7 @@
 import React, {
   Component
 } from 'react'
+import './toTop.less'
 
 class ToTop extends Component {
   constructor() {
@@ -26,10 +27,10 @@ class ToTop extends Component {
     window.scrollTo(0, 0)
   }
   render() {
-    let classname = 'to_top ' + (this.state.show ? 'fade-in' : '')
+    let classname = 'iconfont icon-back-top ' + (this.state.show ? 'fade-in' : '')
 
     return (
-      <div onClick={this.returnTop} className={classname}></div>
+      <div id="to_top" onClick={this.returnTop} className={classname}></div>
     )
   }
 }
