@@ -8,8 +8,8 @@
  */
 export const getCookie = (raw, key) => {
   let ret
-  raw.replace(/(\S+)=(\S+)/g, (...args) => {
-    if (args[1] === key) ret = args[2]
+  raw.replace(/(\S+)=(\S+);?/g, (...args) => {
+    if (args[1] === key) ret = args[2].replace(/;$/, '')
   })
   return ret
 }
