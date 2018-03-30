@@ -14,7 +14,8 @@ import {
   fetchTopics,
   fetchMoreTopics,
   resetPage
-} from '../actions'
+} from '@/actions'
+import './indexPage'
 
 class IndexPage extends Component {
   componentWillMount() {

@@ -12,7 +12,11 @@ import {
 } from 'redux'
 import {
   fetchTopicDetail
-} from '../actions'
+} from '@/actions'
+import {
+  formatNumber
+} from '@/utils'
+import './topicDetail'
 import formatter from 'format-publish-date'
 import Zoomme from 'zoomme'
 
@@ -64,7 +68,7 @@ class TopicDetail extends Component {
           <h2 className="topic_title">{title}</h2>
           <div className="topic_info">
             <span>{author.loginname}</span>
-            <span>{reply_count} / {visit_count}</span>
+            <span>{formatNumber(reply_count)} / {formatNumber(visit_count)}</span>
             <span>发表于：{format(create_at)}</span>
           </div>
         </div>

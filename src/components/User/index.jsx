@@ -14,7 +14,8 @@ import {
   fetchUser,
   fetchSelf,
   logout
-} from '../actions'
+} from '@/actions'
+import './user'
 import formatter from 'format-publish-date'
 
 const format = raw => formatter(new Date(raw))

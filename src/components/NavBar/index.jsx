@@ -12,10 +12,11 @@ import {
 } from 'redux'
 import {
   fetchSelf
-} from '../actions'
+} from 'actions'
 import {
   getCookie
-} from '../utils'
+} from '@/utils'
+import './navBar'
 
 const list = [{
   name: 'all',
@@ -49,7 +50,7 @@ class NavBar extends Component {
     const user = this.props.self
     const navList = list.map(item => {
       return (
-        <NavLink className="tab_item" to={"/tab/" + item.name} key={item.name}>
+        <NavLink className="tab_item" exact to={"/tab/" + item.name} key={item.name}>
           {item.text}
         </NavLink>
       )
@@ -58,7 +59,7 @@ class NavBar extends Component {
     return (
       <div className="panel">
         <div className="header_container">
-          <div className="back_button" onClick={this.goBack}></div>
+          <div className="go_back iconfont icon-back" onClick={this.goBack}></div>
           <div className="tab_list">
             {navList}
           </div>

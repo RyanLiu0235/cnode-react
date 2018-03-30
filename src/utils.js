@@ -29,3 +29,5 @@ export const delCookie = (raw, key) => {
   var value = getCookie(raw, key)
   return key + "=" + value + ";expires=" + exp.toGMTString()
 }
+
+export const formatNumber = raw => (raw).toLocaleString('en-US')

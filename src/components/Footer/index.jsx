@@ -4,7 +4,7 @@ import React, {
 import {
   Link
 } from 'react-router-dom'
-import './footer.less'
+import './footer'
 
 class Footer extends Component {
   render() {

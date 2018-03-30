@@ -10,7 +10,8 @@ import {
 import {
   login,
   fetchSelf
-} from '../actions'
+} from '@/actions'
+import './signIn'
 
 class SignIn extends Component {
   constructor(props) {

@@ -1,0 +1,101 @@
+// 帖子详情
+.topic_detail {
+  padding: 5px;
+  .topic_header {
+    padding: 10px;
+    margin-top: 10px;
+    border-bottom: 1px #e0e0e0 solid;
+    background-color: #fff;
+    .topic_title {
+      max-height: 40px;
+      line-height: 20px;
+      font-size: 18px;
+      overflow: hidden;
+    }
+    .topic_info {
+      height: 20px;
+      line-height: 20px;
+      margin-top: 5px;
+      span {
+        margin-right: 4px;
+        font-size: 10px;
+        color: #999;
+        &:nth-child(2) {
+          color: #666;
+        }
+      }
+    }
+  }
+
+  .topic_body {
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #fff;
+  }
+
+  .topic_comment {
+    margin-top: 10px;
+  }
+
+  .comment_header {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+  } // 帖子评论
+  .comment_list {
+    margin-top: 5px;
+    .comment_item {
+      margin-top: 5px;
+      padding: 10px;
+      border-top: 1px solid #f0f0f0;
+      background-color: #fff;
+      .user_info {
+        display: flex;
+        align-items: center;
+        height: 30px;
+        .user_avatar {
+          position: relative;
+          width: 30px;
+          margin-right: 10px;
+          border-radius: 50%;
+          overflow: hidden;
+          &:after {
+            content: '';
+            display: block;
+            width: 100%;
+            padding-top: 100%;
+          }
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+          }
+        }
+        .user_name {
+          margin-right: 5px;
+          font-size: 10px;
+          color: #666;
+        }
+        .time_stamp {
+          font-size: 10px;
+          color: #999;
+        }
+        .floor {
+          margin-left: 4px;
+          font-size: 10px;
+          color: #999;
+        }
+      }
+      .comment_content {
+        margin-top: 6px;
+        .markdown-text {
+          // display: none;
+        }
+      }
+    }
+  }
+}

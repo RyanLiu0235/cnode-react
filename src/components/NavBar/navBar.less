@@ -1,0 +1,58 @@
+// 顶部导航
+.header_container {
+  display: flex;
+  height: 34px;
+  align-items: center;
+  justify-content: space-between;
+  .go_back {
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+    text-align: center;
+  }
+  .tab_list {
+    display: flex;
+    flex: 1;
+  }
+  .tab_item {
+    display: block;
+    width: 36px;
+    height: 34px;
+    padding: 0 3px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    &[aria-current=true] {
+      color: #fff;
+      background-color: #f64c4c;
+    }
+  }
+  .user_name {
+    position: relative;
+    display: block;
+    width: 30px;
+    img {
+      display: block;
+      width: 100%;
+      border-radius: 50%;
+    }
+    .unread_num {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      z-index: 2;
+      height: 12px;
+      min-width: 6px;
+      line-height: 14px;
+      padding: 0 3px;
+      border-radius: 6px;
+      font-size: 10px;
+      color: #fff;
+      font-style: normal;
+      background-color: #f64c4c;
+    }
+  }
+}
