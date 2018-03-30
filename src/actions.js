@@ -1,10 +1,9 @@
 import {
   delCookie
 } from './utils'
-import unescape from 'unescape-alltypes-html'
-import hljs from 'highlight.js'
+import Worker from './hl.worker.js'
+
 const domain = 'https://cnodejs.org/api/v1/'
-// const hljs = require('highlight.js')
 
 // middlewares for handling responses
 const handleResponse = res => {
@@ -52,23 +51,27 @@ export const resetPage = () => dispatch => {
 }
 
 export const FETCH_TOPIC_DETAIL = 'FETCH_TOPIC_DETAIL'
-export const fetchTopicDetail = ({
-  id
-}) => dispatch => {
+export const fetchTopicDetail = ({ id }) => dispatch => {
   fetch(`${domain}topic/${id}`)
     .then(handleResponse)
     .then(({ data }) => {
-      const codeRE = /<code>([\s\S]*?)<\/code>/gm
-      data.content = data.content.replace(codeRE, (...args) => {
-        const raw = args[1]
-        const unescaped = unescape(raw)
-        const { value } = hljs.highlight('javascript', unescaped)
-        return `<code>${value}</code>`
-      })
+      // dispatch first for pre-rendering
       dispatch({
         type: FETCH_TOPIC_DETAIL,
         data
       })
+
+      // highlight code and re-render
+      const _data = Object.assign({}, data)
+      const worker = new Worker()
+      worker.onmessage = e => {
+        _data.content = e.data
+        dispatch({
+          type: FETCH_TOPIC_DETAIL,
+          data: _data
+        })
+      }
+      worker.postMessage({ content: data.content })
     })
 }
 
