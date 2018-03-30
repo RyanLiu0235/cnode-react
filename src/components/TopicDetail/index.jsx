@@ -19,6 +19,7 @@ import {
 import './topicDetail'
 import formatter from 'format-publish-date'
 import Zoomme from 'zoomme'
+import 'highlight.js/styles/default.css'
 
 const format = raw => formatter(new Date(raw))
 
