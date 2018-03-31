@@ -1,6 +1,6 @@
 import {
   FETCH_TOPIC_DETAIL
-} from '../actions'
+} from 'actions'
 
 let _state = {
   replies: [],

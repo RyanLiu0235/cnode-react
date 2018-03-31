@@ -11,7 +11,8 @@ import {
   bindActionCreators
 } from 'redux'
 import {
-  fetchSelf
+  fetchSelf,
+  registerAccesstoken
 } from 'actions'
 import {
   getCookie
@@ -38,10 +39,12 @@ const list = [{
 class NavBar extends Component {
   componentWillMount() {
     const cnode = getCookie(document.cookie, 'cnode')
+    const accesstoken = getCookie(document.cookie, 'accesstoken') || 0
 
     if (cnode) {
       this.props.fetchSelf(cnode)
     }
+    this.props.registerAccesstoken(accesstoken)
   }
   goBack() {
     window.history.back()
@@ -87,7 +90,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchSelf
+    fetchSelf,
+    registerAccesstoken
   }, dispatch)
 }
 

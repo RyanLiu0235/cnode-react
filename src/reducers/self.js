@@ -1,7 +1,7 @@
 import {
   FETCH_SELF,
   LOG_OUT
-} from '../actions'
+} from 'actions'
 
 let _state = {
   recent_topics: [],
@@ -12,10 +12,7 @@ export default function self(state = _state, action) {
     case FETCH_SELF:
       return action.data
     case LOG_OUT:
-      return {
-        recent_topics: [],
-        recent_replies: []
-      }
+      return _state
     default:
       return state
   }

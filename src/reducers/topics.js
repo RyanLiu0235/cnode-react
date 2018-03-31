@@ -2,7 +2,7 @@ import {
   FETCH_TOPICS,
   FETCH_MORE_TOPICS,
   RESET_PAGE
-} from '../actions'
+} from 'actions'
 
 let _state = {
   page: 1,

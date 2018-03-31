@@ -2,6 +2,7 @@ import {
   combineReducers
 } from 'redux'
 
+import accesstoken from './accesstoken'
 import self from './self'
 import user from './user'
 import topic from './topic'
@@ -11,7 +12,8 @@ const reducers = combineReducers({
   topic,
   topics,
   user,
-  self
+  self,
+  accesstoken
 })
 
 export default reducers

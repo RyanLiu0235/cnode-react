@@ -28,7 +28,8 @@ class TopicDetail extends Component {
     const id = this.props.match.params.id
 
     this.props.fetchTopicDetail({
-      id
+      id,
+      accesstoken: this.props.accesstoken
     })
   }
   componentDidMount() {
@@ -51,13 +52,19 @@ class TopicDetail extends Component {
     const ReplyList = replies.map((item, index) => {
       return (
         <div className="comment_item" key={item.id}>
-          <div className="user_info">
-            <Link to={ '/user/' + item.author.loginname } className="user_avatar">
-              <img src={item.author.avatar_url} alt={item.author.loginname} />
-            </Link>
-            <span className="user_name">{item.author.loginname}</span>
-            <span className="time_stamp">{format(item.create_at)}</span>
-            <span className="floor">{index + 1}楼</span>
+          <div className="meta_info">
+            <div className="user_info">
+              <Link to={ '/user/' + item.author.loginname } className="user_avatar">
+                <img src={item.author.avatar_url} alt={item.author.loginname} />
+              </Link>
+              <span className="user_name">{item.author.loginname}</span>
+              <span className="time_stamp">{format(item.create_at)}</span>
+              <span className="floor">{index + 1}楼</span>
+            </div>
+            <div className="user_action">
+              <span className="iconfont icon-thumbup"></span>
+              <span className="up_number">{item.ups.length}</span>
+            </div>
           </div>
           <div className="comment_content" dangerouslySetInnerHTML={{__html: item.content}} />
         </div>
@@ -83,9 +90,13 @@ class TopicDetail extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({
+  topic,
+  accesstoken
+}) {
   return {
-    topic: state.topic
+    topic,
+    accesstoken
   }
 }
 

@@ -35,7 +35,8 @@ class SignIn extends Component {
       this.props.history.push('/')
       this.props.fetchSelf(loginname)
       // 种cookie，设置过期时间为12个小时之后
-      document.cookie = `cnode=${loginname}; expires=${new Date(Date.now() + 3600 * 12)}`
+      const later = new Date(Date.now() + 3600 * 12)
+      document.cookie = `cnode=${loginname}; expires=${later}; accesstoken=${this.state.accesstoken}; expires=${later}`
     }, err => {
       console.error(err)
     })

@@ -1,6 +1,6 @@
 import {
   FETCH_USER
-} from '../actions'
+} from 'actions'
 
 let _state = {
   recent_topics: [],

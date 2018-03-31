@@ -51,8 +51,8 @@ export const resetPage = () => dispatch => {
 }
 
 export const FETCH_TOPIC_DETAIL = 'FETCH_TOPIC_DETAIL'
-export const fetchTopicDetail = ({ id }) => dispatch => {
-  fetch(`${domain}topic/${id}`)
+export const fetchTopicDetail = ({ id, accesstoken }) => dispatch => {
+  fetch(`${domain}topic/${id}/?accesstoken=${accesstoken}`)
     .then(handleResponse)
     .then(({ data }) => {
       // dispatch first for pre-rendering
@@ -96,16 +96,31 @@ export const fetchSelf = name => dispatch => {
   _fetchUser(name, dispatch, FETCH_SELF)
 }
 
+export const REGISTER_ACCESSTOKEN = 'REGISTER_ACCESSTOKEN'
+export const registerAccesstoken = accesstoken => dispatch => {
+  dispatch({
+    type: REGISTER_ACCESSTOKEN,
+    data: accesstoken
+  })
+}
 export const login = accesstoken => dispatch => {
   return fetch(`${domain}accesstoken`, {
-    method: 'POST',
-    body: JSON.stringify({
-      accesstoken
-    }),
-    headers: new Headers({
-      'Content-Type': 'application/json'
+      method: 'POST',
+      body: JSON.stringify({
+        accesstoken
+      }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
     })
-  }).then(handleResponse)
+    .then(handleResponse)
+    .then(res => {
+      dispatch({
+        type: REGISTER_ACCESSTOKEN,
+        data: accesstoken
+      })
+      return Promise.resolve(res)
+    }, err => Promise.reject(err))
 }
 
 
