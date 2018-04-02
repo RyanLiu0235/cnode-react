@@ -67,13 +67,18 @@ class TopicDetail extends Component {
       is_collect: topic.is_collect
     })
   }
-  like(id) {
+  like(id, author) {
     const {
       accesstoken,
-      likeComment
+      likeComment,
+      self
     } = this.props
     if (!accesstoken) {
       alert('请先登录！')
+      return
+    }
+    if (author === self) {
+      alert('不能给自己点赞哦！')
       return
     }
 
@@ -132,7 +137,7 @@ class TopicDetail extends Component {
               <span className="time_stamp">{format(item.create_at)}</span>
               <span className="floor">{index + 1}楼</span>
             </div>
-            <div className={'user_action ' + (item.is_uped ? 'liked' : '')} onClick={this.like.bind(this, item.id)}>
+            <div className={'user_action ' + (item.is_uped ? 'liked' : '')} onClick={this.like.bind(this, item.id, item.author.loginname)}>
               <span className="iconfont icon-thumbup"></span>
               <span className="up_number">{item.ups.length}</span>
             </div>
@@ -171,11 +176,13 @@ class TopicDetail extends Component {
 
 function mapStateToProps({
   topic,
-  accesstoken
+  accesstoken,
+  self
 }) {
   return {
     topic,
-    accesstoken
+    accesstoken,
+    self: self.loginname
   }
 }
 
