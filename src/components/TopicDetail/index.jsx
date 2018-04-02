@@ -121,6 +121,7 @@ class TopicDetail extends Component {
         this.setState({
           reply: ''
         })
+        this.refs.textarea.value = ''
       }
     })
   }
