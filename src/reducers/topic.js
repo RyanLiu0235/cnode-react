@@ -1,6 +1,7 @@
 import {
   FETCH_TOPIC_DETAIL,
-  COLLECT_TOPIC
+  COLLECT_TOPIC,
+  LIKE_REPLY
 } from 'actions/topics'
 
 let _state = {
@@ -18,6 +19,19 @@ export default function topic(state = _state, action) {
       return action.data
     case COLLECT_TOPIC:
       return Object.assign({}, state, { is_collect: true })
+    case LIKE_REPLY:
+      const copy = Object.assign({}, state)
+      const reply = copy.replies.find(item => item.id === action.id)
+      if (reply) {
+        if (action.action === 'up') {
+          reply.is_uped = true
+          reply.ups.push(action.id)
+        } else {
+          reply.is_uped = false
+          reply.ups.splice(reply.ups.indexOf(action.id))
+        }
+      }
+      return copy
     default:
       return state
   }

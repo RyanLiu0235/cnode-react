@@ -4,7 +4,7 @@ import { domain } from '@/constants'
 
 export const COLLECT_TOPIC = 'COLLECT_TOPIC'
 export const collectTopic = ({ accesstoken, topic_id }) => dispatch => {
-  return fetch(`${domain}topic_collect/collect`, {
+  fetch(`${domain}topic_collect/collect`, {
       method: 'POST',
       body: JSON.stringify({ accesstoken, topic_id }),
       headers: new Headers({
@@ -16,6 +16,28 @@ export const collectTopic = ({ accesstoken, topic_id }) => dispatch => {
       if (res.success) {
         dispatch({
           type: COLLECT_TOPIC
+        })
+      }
+    })
+}
+
+export const LIKE_REPLY = 'LIKE_REPLY'
+export const likeComment = ({ id, accesstoken }) => dispatch => {
+  id = String(id)
+  fetch(`${domain}reply/${id}/ups`, {
+      method: 'POST',
+      body: JSON.stringify({ accesstoken }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .then(handleResponse)
+    .then(res => {
+      if (res.success) {
+        dispatch({
+          type: LIKE_REPLY,
+          action: res.action,
+          id
         })
       }
     })

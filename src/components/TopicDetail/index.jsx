@@ -12,7 +12,8 @@ import {
 } from 'redux'
 import {
   fetchTopicDetail,
-  collectTopic
+  collectTopic,
+  likeComment
 } from 'actions/topics'
 import {
   formatNumber
@@ -52,6 +53,16 @@ class TopicDetail extends Component {
       topic_id: topic.id
     })
   }
+  like(id) {
+    const {
+      accesstoken,
+      likeComment
+    } = this.props
+    likeComment({
+      accesstoken,
+      id
+    })
+  }
   render() {
     const {
       replies,
@@ -76,7 +87,7 @@ class TopicDetail extends Component {
               <span className="time_stamp">{format(item.create_at)}</span>
               <span className="floor">{index + 1}楼</span>
             </div>
-            <div className="user_action">
+            <div className={'user_action ' + (item.is_uped ? 'liked' : '')} onClick={this.like.bind(this, item.id)}>
               <span className="iconfont icon-thumbup"></span>
               <span className="up_number">{item.ups.length}</span>
             </div>
@@ -119,7 +130,8 @@ function mapStateToProps({
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchTopicDetail,
-    collectTopic
+    collectTopic,
+    likeComment
   }, dispatch)
 }
 
