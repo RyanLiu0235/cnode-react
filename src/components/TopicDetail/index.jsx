@@ -12,7 +12,7 @@ import {
 } from 'redux'
 import {
   fetchTopicDetail
-} from '@/actions'
+} from 'actions/topics'
 import {
   formatNumber
 } from '@/utils'

@@ -43,18 +43,23 @@ body {
 
 .button_container {
   text-align: center;
-  .signup_button {
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    margin: 5px auto 0;
-    text-align: center;
-    font-size: 14px;
-    color: #fff;
+}
+
+.button {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  &.button_warning {
     background-color: #f64c4c;
-    &.landing {
-      background-color: darken(#f64c4c, 20%);
-    }
+  }
+  &.button_primary {
+    background-color: #6666ff;
+  }
+  &.button_info {
+    background-color: #91b151;
   }
 }

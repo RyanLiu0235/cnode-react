@@ -9,7 +9,7 @@ module.exports = {
     alias: {
       'react-native': 'react-native-web',
       '@': resolve('./'),
-      actions: resolve('./actions.js')
+      actions: resolve('./actions')
     }
   },
   module: {

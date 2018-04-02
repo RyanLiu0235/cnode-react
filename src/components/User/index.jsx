@@ -14,7 +14,7 @@ import {
   fetchUser,
   fetchSelf,
   logout
-} from '@/actions'
+} from 'actions/users'
 import './user'
 import formatter from 'format-publish-date'
 

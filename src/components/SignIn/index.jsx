@@ -10,7 +10,7 @@ import {
 import {
   login,
   fetchSelf
-} from '@/actions'
+} from 'actions/users'
 import './signIn'
 
 class SignIn extends Component {
@@ -42,7 +42,7 @@ class SignIn extends Component {
     })
   }
   render() {
-    const buttonClass = 'signup_button ' + (this.state.landState === '登录中...' ? 'landing' : '')
+    const buttonClass = 'button ' + (this.state.landState === '登录中...' ? 'button_primary' : 'button_info')
     return (
       <div className="panel">
 				<p className="panel_title">登录到CNode</p>

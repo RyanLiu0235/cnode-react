@@ -1,6 +1,6 @@
 import {
   REGISTER_ACCESSTOKEN
-} from 'actions'
+} from 'actions/users'
 
 export default function accesstoken(state = 0, action) {
   switch (action.type) {

@@ -13,7 +13,7 @@ import {
 import {
   fetchSelf,
   registerAccesstoken
-} from 'actions'
+} from 'actions/users'
 import {
   getCookie
 } from '@/utils'

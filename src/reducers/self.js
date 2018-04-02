@@ -1,7 +1,7 @@
 import {
   FETCH_SELF,
   LOG_OUT
-} from 'actions'
+} from 'actions/users'
 
 let _state = {
   recent_topics: [],
