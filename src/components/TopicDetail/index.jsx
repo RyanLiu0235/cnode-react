@@ -11,7 +11,8 @@ import {
   bindActionCreators
 } from 'redux'
 import {
-  fetchTopicDetail
+  fetchTopicDetail,
+  collectTopic
 } from 'actions/topics'
 import {
   formatNumber
@@ -39,7 +40,17 @@ class TopicDetail extends Component {
     })
   }
   collect() {
-    if (this.props.topic.is_collect) return
+    const {
+      topic,
+      accesstoken,
+      collectTopic
+    } = this.props
+    if (topic.is_collect) return
+
+    collectTopic({
+      accesstoken,
+      topic_id: topic.id
+    })
   }
   render() {
     const {
@@ -107,7 +118,8 @@ function mapStateToProps({
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchTopicDetail
+    fetchTopicDetail,
+    collectTopic
   }, dispatch)
 }
 

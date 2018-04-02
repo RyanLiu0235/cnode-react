@@ -1,5 +1,6 @@
 import {
-  FETCH_TOPIC_DETAIL
+  FETCH_TOPIC_DETAIL,
+  COLLECT_TOPIC
 } from 'actions/topics'
 
 let _state = {
@@ -15,6 +16,8 @@ export default function topic(state = _state, action) {
   switch (action.type) {
     case FETCH_TOPIC_DETAIL:
       return action.data
+    case COLLECT_TOPIC:
+      return Object.assign({}, state, { is_collect: true })
     default:
       return state
   }

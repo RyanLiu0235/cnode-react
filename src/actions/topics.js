@@ -2,7 +2,8 @@ import Worker from '@/hl.worker.js'
 import { handleResponse, handleError } from '@/middleWares'
 import { domain } from '@/constants'
 
-export const collect = ({ accesstoken, topic_id }) => dispatch => {
+export const COLLECT_TOPIC = 'COLLECT_TOPIC'
+export const collectTopic = ({ accesstoken, topic_id }) => dispatch => {
   return fetch(`${domain}topic_collect/collect`, {
       method: 'POST',
       body: JSON.stringify({ accesstoken, topic_id }),
@@ -11,6 +12,13 @@ export const collect = ({ accesstoken, topic_id }) => dispatch => {
       })
     })
     .then(handleResponse)
+    .then(res => {
+      if (res.success) {
+        dispatch({
+          type: COLLECT_TOPIC
+        })
+      }
+    })
 }
 
 const _fetchTopics = (page, tab, mutation, dispatch) => {
