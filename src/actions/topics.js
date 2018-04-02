@@ -99,16 +99,17 @@ export const fetchTopicDetail = ({ id, accesstoken }) => dispatch => {
         data
       })
 
-      // highlight code and re-render
+      // highlight code, add hash to user link and re-render
       const _data = Object.assign({}, data)
       const worker = new Worker()
       worker.onmessage = e => {
-        _data.content = e.data
+        console.timeEnd('worker')
         dispatch({
           type: FETCH_TOPIC_DETAIL,
-          data: _data
+          data: e.data
         })
       }
-      worker.postMessage({ content: data.content })
+      console.time('worker')
+      worker.postMessage(_data)
     })
 }
