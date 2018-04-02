@@ -45,6 +45,17 @@ export const likeComment = ({ id, accesstoken }) => dispatch => {
     })
 }
 
+export const submitReply = ({ accesstoken, topic_id, content }) => dispatch => {
+  return fetch(`${domain}topic/${topic_id}/replies`, {
+      method: 'POST',
+      body: JSON.stringify({ accesstoken, content }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .then(handleResponse)
+}
+
 const _fetchTopics = (page, tab, mutation, dispatch) => {
   fetch(`${domain}topics?page=${page}&tab=${tab}`)
     .then(handleResponse)

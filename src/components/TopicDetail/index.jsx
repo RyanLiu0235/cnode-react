@@ -13,6 +13,7 @@ import {
 import {
   fetchTopicDetail,
   collectTopic,
+  submitReply,
   likeComment
 } from 'actions/topics'
 import {
@@ -26,18 +27,27 @@ import 'highlight.js/styles/default.css'
 const format = raw => formatter(new Date(raw))
 
 class TopicDetail extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      reply: ''
+    }
+  }
   componentWillMount() {
-    const id = this.props.match.params.id
-
-    this.props.fetchTopicDetail({
-      id,
-      accesstoken: this.props.accesstoken
-    })
+    this._fetchTopicDetail()
   }
   componentDidMount() {
     const container = document.querySelector('.topic_body')
     new Zoomme({
       container
+    })
+  }
+  _fetchTopicDetail() {
+    const id = this.props.match.params.id
+
+    this.props.fetchTopicDetail({
+      id,
+      accesstoken: this.props.accesstoken
     })
   }
   collect() {
@@ -70,6 +80,32 @@ class TopicDetail extends Component {
     likeComment({
       accesstoken,
       id
+    })
+  }
+  handleInput(e) {
+    this.setState({
+      reply: e.target.value.trim()
+    })
+  }
+  submit() {
+    const {
+      accesstoken,
+      topic,
+      submitReply
+    } = this.props
+    if (!accesstoken) {
+      alert('请先登录！')
+      return
+    }
+
+    submitReply({
+      accesstoken,
+      topic_id: topic.id,
+      content: this.state.reply
+    }).then(res => {
+      if (res.success) {
+        this._fetchTopicDetail()
+      }
     })
   }
   render() {
@@ -121,6 +157,13 @@ class TopicDetail extends Component {
           <div className="comment_header">{!!commentList ? '评论列表' : '暂无评论'}</div>
           <div className="comment_list">{ReplyList}</div>
         </div>
+        <div className="topic_reply">
+          <p>添加评论</p>
+          <div className="form">
+            <textarea onChange={this.handleInput.bind(this)}></textarea>
+            <button className="button button_info" onClick={this.submit.bind(this)}>提交</button>
+          </div>
+        </div>
       </div>
     )
   }
@@ -140,6 +183,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchTopicDetail,
     collectTopic,
+    submitReply,
     likeComment
   }, dispatch)
 }
