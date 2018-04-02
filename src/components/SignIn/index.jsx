@@ -23,7 +23,7 @@ class SignIn extends Component {
   }
   handleInput(e) {
     this.setState({
-      accesstoken: e.target.value
+      accesstoken: e.target.value.trim()
     })
   }
   handleSignin() {
@@ -34,9 +34,8 @@ class SignIn extends Component {
     this.props.login(this.state.accesstoken).then(({ loginname }) => {
       this.props.history.push('/')
       this.props.fetchSelf(loginname)
-      // 种cookie，设置过期时间为12个小时之后
-      const later = new Date(Date.now() + 3600 * 12)
-      document.cookie = `cnode=${loginname}; expires=${later}; accesstoken=${this.state.accesstoken}; expires=${later};`
+      localStorage.setItem('cnode', loginname)
+      localStorage.setItem('accesstoken', this.state.accesstoken)
     }, err => {
       console.error(err)
     })

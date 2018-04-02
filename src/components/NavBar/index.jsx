@@ -14,9 +14,6 @@ import {
   fetchSelf,
   registerAccesstoken
 } from 'actions/users'
-import {
-  getCookie
-} from '@/utils'
 import './navBar'
 
 const list = [{
@@ -38,8 +35,8 @@ const list = [{
 
 class NavBar extends Component {
   componentWillMount() {
-    const cnode = getCookie(document.cookie, 'cnode')
-    const accesstoken = getCookie(document.cookie, 'accesstoken') || 0
+    const cnode = localStorage.getItem('cnode')
+    const accesstoken = localStorage.getItem('accesstoken') || 0
 
     if (cnode) {
       this.props.fetchSelf(cnode)
