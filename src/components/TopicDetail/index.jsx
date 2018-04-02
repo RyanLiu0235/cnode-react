@@ -110,6 +110,9 @@ class TopicDetail extends Component {
     }).then(res => {
       if (res.success) {
         this._fetchTopicDetail()
+        this.setState({
+          reply: ''
+        })
       }
     })
   }
@@ -166,7 +169,7 @@ class TopicDetail extends Component {
           <p>添加评论</p>
           <div className="form">
             <textarea onChange={this.handleInput.bind(this)}></textarea>
-            <button className="button button_info" onClick={this.submit.bind(this)}>提交</button>
+            <div className="button button_info" onClick={this.submit.bind(this)}>提交</div>
           </div>
         </div>
       </div>
