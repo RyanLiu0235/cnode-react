@@ -49,6 +49,8 @@ class NavBar extends Component {
   handleLogout() {
     this.props.logout().then(rs => {
       this.props.history.push('/')
+      localStorage.removeItem('cnode')
+      localStorage.removeItem('accesstoken')
     })
   }
   render() {
