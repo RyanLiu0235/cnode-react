@@ -46,6 +46,10 @@ class TopicDetail extends Component {
       accesstoken,
       collectTopic
     } = this.props
+    if (!accesstoken) {
+      alert('请先登录！')
+      return
+    }
     if (topic.is_collect) return
 
     collectTopic({
@@ -58,6 +62,11 @@ class TopicDetail extends Component {
       accesstoken,
       likeComment
     } = this.props
+    if (!accesstoken) {
+      alert('请先登录！')
+      return
+    }
+
     likeComment({
       accesstoken,
       id
