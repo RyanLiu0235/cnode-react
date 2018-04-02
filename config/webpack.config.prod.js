@@ -11,6 +11,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
 const paths = require('./paths')
 const getClientEnvironment = require('./env')
+const merge = require('webpack-merge')
 const config = require('./webpack.config')
 
 const publicPath = paths.servedPath
@@ -52,7 +53,7 @@ module.exports = merge(config, {
   module: {
     strictExportPresence: true,
     rules: [{
-      test: /\.css$/,
+      test: /\.(css|less)$/,
       loader: ExtractTextPlugin.extract(
         Object.assign({
             fallback: {
@@ -66,7 +67,7 @@ module.exports = merge(config, {
               options: {
                 importLoaders: 1,
                 minimize: true,
-                sourceMap: shouldUseSourceMap,
+                sourceMap: false,
               }
             }, {
               loader: require.resolve('postcss-loader'),
@@ -85,6 +86,8 @@ module.exports = merge(config, {
                   })
                 ]
               }
+            }, {
+              loader: require.resolve('less-loader') // compiles Less to CSS
             }]
           },
           extractTextPluginOptions
@@ -123,7 +126,7 @@ module.exports = merge(config, {
         comments: false,
         ascii_only: true,
       },
-      sourceMap: shouldUseSourceMap,
+      sourceMap: false,
     }),
     new ExtractTextPlugin({
       filename: cssFilename,
