@@ -18,7 +18,7 @@ export default function topic(state = _state, action) {
     case FETCH_TOPIC_DETAIL:
       return action.data
     case COLLECT_TOPIC:
-      return Object.assign({}, state, { is_collect: true })
+      return Object.assign({}, state, { is_collect: !action.action })
     case LIKE_REPLY:
       const copy = Object.assign({}, state)
       const reply = copy.replies.find(item => item.id === action.id)

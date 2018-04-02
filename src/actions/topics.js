@@ -3,8 +3,9 @@ import { handleResponse, handleError } from '@/middleWares'
 import { domain } from '@/constants'
 
 export const COLLECT_TOPIC = 'COLLECT_TOPIC'
-export const collectTopic = ({ accesstoken, topic_id }) => dispatch => {
-  fetch(`${domain}topic_collect/collect`, {
+export const collectTopic = ({ accesstoken, topic_id, is_collect }) => dispatch => {
+  const url = `${domain}topic_collect/${is_collect ? 'de_' : ''}collect`
+  fetch(url, {
       method: 'POST',
       body: JSON.stringify({ accesstoken, topic_id }),
       headers: new Headers({
@@ -15,7 +16,8 @@ export const collectTopic = ({ accesstoken, topic_id }) => dispatch => {
     .then(res => {
       if (res.success) {
         dispatch({
-          type: COLLECT_TOPIC
+          type: COLLECT_TOPIC,
+          action: is_collect
         })
       }
     })

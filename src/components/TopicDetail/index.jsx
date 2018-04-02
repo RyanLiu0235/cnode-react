@@ -50,11 +50,11 @@ class TopicDetail extends Component {
       alert('请先登录！')
       return
     }
-    if (topic.is_collect) return
 
     collectTopic({
       accesstoken,
-      topic_id: topic.id
+      topic_id: topic.id,
+      is_collect: topic.is_collect
     })
   }
   like(id) {
