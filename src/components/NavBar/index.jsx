@@ -31,6 +31,9 @@ const list = [{
 }, {
   name: 'job',
   text: '招聘'
+}, {
+  name: 'dev',
+  text: '测试'
 }]
 
 class NavBar extends Component {
