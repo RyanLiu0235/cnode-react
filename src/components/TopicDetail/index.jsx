@@ -87,6 +87,14 @@ class TopicDetail extends Component {
       id
     })
   }
+  reply(name) {
+    const at = `@${name} `
+    this.refs.textarea.value = at
+    this.refs.textarea.focus()
+    this.setState({
+      reply: at
+    })
+  }
   handleInput(e) {
     this.setState({
       reply: e.target.value.trim()
@@ -140,9 +148,15 @@ class TopicDetail extends Component {
               <span className="time_stamp">{format(item.create_at)}</span>
               <span className="floor">{index + 1}楼</span>
             </div>
-            <div className={'user_action ' + (item.is_uped ? 'liked' : '')} onClick={this.like.bind(this, item.id, item.author.loginname)}>
-              <span className="iconfont icon-thumbup"></span>
-              <span className="up_number">{item.ups.length}</span>
+            {/*赞*/}
+            <div className="user_action">
+              <div className={'action_item' + (item.is_uped ? 'liked' : '')} onClick={this.like.bind(this, item.id, item.author.loginname)}>
+                <span className="iconfont icon-thumbup"></span>
+                <span className="up_number">{item.ups.length}</span>
+              </div>
+              <div className="action_item" onClick={this.reply.bind(this, item.author.loginname)}>
+                <span className="iconfont icon-reply"></span>
+              </div>
             </div>
           </div>
           <div className="comment_content" dangerouslySetInnerHTML={{__html: item.content}} />
@@ -168,7 +182,7 @@ class TopicDetail extends Component {
         <div className="topic_reply">
           <p>添加评论</p>
           <div className="form">
-            <textarea onChange={this.handleInput.bind(this)}></textarea>
+            <textarea ref="textarea" onChange={this.handleInput.bind(this)}></textarea>
             <div className="button button_info" onClick={this.submit.bind(this)}>提交</div>
           </div>
         </div>
