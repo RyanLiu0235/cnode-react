@@ -2,6 +2,17 @@ import Worker from '@/hl.worker.js'
 import { handleResponse, handleError } from '@/middleWares'
 import { domain } from '@/constants'
 
+export const collect = ({ accesstoken, topic_id }) => dispatch => {
+  return fetch(`${domain}topic_collect/collect`, {
+      method: 'POST',
+      body: JSON.stringify({ accesstoken, topic_id }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .then(handleResponse)
+}
+
 const _fetchTopics = (page, tab, mutation, dispatch) => {
   fetch(`${domain}topics?page=${page}&tab=${tab}`)
     .then(handleResponse)

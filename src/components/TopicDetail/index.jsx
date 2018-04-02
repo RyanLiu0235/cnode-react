@@ -38,6 +38,9 @@ class TopicDetail extends Component {
       container
     })
   }
+  collect() {
+    if (this.props.topic.is_collect) return
+  }
   render() {
     const {
       replies,
@@ -46,6 +49,7 @@ class TopicDetail extends Component {
       create_at,
       reply_count,
       visit_count,
+      is_collect,
       content
     } = this.props.topic
     const commentList = replies.length;
@@ -78,6 +82,7 @@ class TopicDetail extends Component {
             <span>{author.loginname}</span>
             <span>{formatNumber(reply_count)} / {formatNumber(visit_count)}</span>
             <span>发表于：{format(create_at)}</span>
+            <div className="button button_info" onClick={this.collect.bind(this)}>{is_collect ? '已' : ''}收藏</div>
           </div>
         </div>
         <div className="topic_body" dangerouslySetInnerHTML={{__html: content}} />
